@@ -1,0 +1,560 @@
+<p>
+	SOLID principai apibrėžia tvarkingo, lengvai palaikomo objektinio projektavimo principus. SOLID trumpinys yra penkių principų santrumpa:
+</p>
+<p>
+	<b>S</b> - Single-Responsibility Principle (SRP)
+</p>
+<p>
+	<b>O</b> - Open/Closed Principle (OCP)
+</p>
+<p>
+	<b>L</b> - Liskov Substitution Principle (LSP)
+</p>
+<p>
+	<b>I</b> - Interface Segregation Principle (ISP)
+</p>
+<p>
+	<b>D</b> - Dependency-Inversion Principle (DIP)
+</p>
+<p>
+	Šiame skyriuje panagrinėsime šiuos principus, kurių laikantis programinės įrangos palaikymas, programuotojo atžvilgiu, yra nesudėtingas procesas, o funkcionalumo praplėtimas nesugriauna jau esamos infrastruktūros.
+</p>
+<p>
+	<div class="list-group" style="padding-left: 20px; padding-right: 20px;">
+		<a style="padding:10px; background-color: #d9dbf1; color: blue;" href="#srp" class="list-group-item list-group-item-action"><u><b>17.1. Single-Responsibility Principle</b></u></a>
+		<a style="padding:10px; background-color: #d9dbf1; color: blue;" href="#ocp" class="list-group-item list-group-item-action"><u><b>17.2. Open/Closed Principle</b></u></a>
+		<a style="padding:10px; background-color: #d9dbf1; color: blue;" href="#lsp" class="list-group-item list-group-item-action"><u><b>17.3. Liskov Substitution Principle</b></u></a>
+		<a style="padding:10px; background-color: #d9dbf1; color: blue;" href="#isp" class="list-group-item list-group-item-action"><u><b>17.4. Interface Segregation Principle</b></u></a>
+		<a style="padding:10px; background-color: #d9dbf1; color: blue;" href="#dip" class="list-group-item list-group-item-action"><u><b>17.5. Dependency-Inversion Principle</b></u></a>
+	</div>
+</p>
+
+<div id="srp" class="container-fluid" style="text-align:center;">
+	<h4><b>17.1. Single-Responsibility Principle</b></h4>
+	<p>
+		Pagal vienafunkciškumo principą (angl. <i>single-responsibility</i>) turi būti tik viena priežastis keisti, modifikuoti klasę, pasikeitus reikalavimams programinei įrangai. Panagrinėkime pavyzdį. Duota <i>Book</i> klasė (1 pav.):
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/17_1_pvz_1.jpg"><br/>
+		<b>1 pav. Klasės <i>Book</i> UML reprezentacija.</b><br/>
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<div class="border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Klasės <i>Book</i> realizacija C# kodu:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Book</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private string</k1> title;<br>
+				<n>4. </n><t/><t/><k1>private string</k1>[] authors;<br>
+				<n>5. </n><t/><t/><k1>private</k1> <k2>Page</k2>[] pages;<br>
+				<n>6. </n><t/><t/><k1>private int</k1> currentPageNo;<br>
+				<n>7. </n><t/><br>
+				<n>8. </n><t/><t/><k1>public string</k1> GetTitle()<br>
+				<n>9. </n><t/><t/>{<br>
+				<n>9. </n><t/><t/><t/><k1>return</k1> title;<br>
+				<n>10.</n><t/><t/>}<br>
+				<n>11.</n><t/><br>
+				<n>12.</n><t/><t/><k1>public string[]</k1> GetAuthors()<br>
+				<n>13.</n><t/><t/>{<br>
+				<n>14.</n><t/><t/><t/><k1>return</k1> authors;<br>
+				<n>15.</n><t/><t/>}<br>
+				<n>16.</n><t/><br>
+				<n>17.</n><t/><t/><k1>public void</k1> DisplayNextPage()<br>
+				<n>18.</n><t/><t/>{<br>
+				<n>19.</n><t/><t/><t/>currentPageNo++;<br>
+				<n>20.</n><t/><t/><t/><k2>Console</k2>.Write(pages[currentPageNo]);<br>
+				<n>21.</n><t/><t/>}<br>
+				<n>22.</n><t/><br>
+				<n>23.</n><t/><t/><k1>public void</k1> DisplayPreviousPage()<br>
+				<n>24.</n><t/><t/>{<br>
+				<n>25.</n><t/><t/><t/>currentPageNo--;<br>
+				<n>26.</n><t/><t/><t/><k2>Console</k2>.Write(pages[currentPageNo]);<br>
+				<n>27.</n><t/><t/>}<br>
+				<n>28.</n><t/>}
+			</div>
+		</div>
+	</div>
+	
+	<p>
+		Duotame pavyzdyje klasė <i>Book</i> turi dvi atsakomybes ir, tuo pačiu, dvi priežastis dėl kurių ją gali reikėti keisti. Pirma atsakomybė yra valdyti su knyga susijusią informaciją, o kita - atvaizduoti informaciją (metodai <i>DisplayNextPage()</i> ir <i>DisplayPreviousPage()</i>). Vienos atsakomybės reikia atsisakyti, perkeliant ją kitai klasei. Šiuo atveju, puslapio atvaizdavimą iškelsime į kitą klasę, kurią pavadinsime <i>Reader</i>, o klasėje <i>Book</i> paliksime tik duomenų apie knygą valdymą. Klasių tarpusavio ryšys pavaizduotas 2 pav.
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/17_2_pvz_1.jpg"><br/>
+		<b>2 pav. Ryšys tarp <i>Book</i> ir <i>Reader</i> klasių.</b><br/>
+	</p>
+	<p>
+		Šiuo atveju, <i>Book</i> klasė grąžina reikiamą atvaizduoti puslapį, o <i>Reader</i> klasė jį atvaizduoja. Pagal dabartinę schemą, kiekviena klasė turi vieną ir tik vieną paskirtį, tuo pačiu ir priežastį dėl kurios jas reikėtų keisti: <i>Reader</i> klasę dėl atvaizdavimo, <i>Book</i> - dėl atvaizduojamosios informacijos.
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#csharp1">
+			<b><u>2 pav. schemos programinė realizacija C# kalba</u></b> <img id="csharpToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">	
+			<b>Klasė Book:</b>	
+			<div class="code" style="vertical-align:top; text-align: left;">			
+				<n>1. </n><t/><k1>class</k1> <k2>Book</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private string</k1> title;<br>
+				<n>4. </n><t/><t/><k1>private string</k1>[] authors;<br>
+				<n>5. </n><t/><t/><k1>private</k1> <k2>Page</k2>[] pages;<br>
+				<n>6. </n><t/><t/><k1>private int</k1> currentPageNo;<br>
+				<n>7. </n><t/><br>
+				<n>8. </n><t/><t/><k1>public string</k1> GetTitle()<br>
+				<n>9. </n><t/><t/>{<br>
+				<n>10. </n><t/><t/><t/><k1>return</k1> title;<br>
+				<n>11.</n><t/><t/>}<br>
+				<n>12.</n><t/><br>
+				<n>13.</n><t/><t/><k1>public string[]</k1> GetAuthors()<br>
+				<n>14.</n><t/><t/>{<br>
+				<n>15.</n><t/><t/><t/><k1>return</k1> authors;<br>
+				<n>16.</n><t/><t/>}<br>
+				<n>17.</n><t/><br>
+				<n>18.</n><t/><t/><k1>public</k1> <k2>Page</k2> GetNextPage()<br>
+				<n>19.</n><t/><t/>{<br>
+				<n>20.</n><t/><t/><t/>currentPageNo++;<br>
+				<n>21.</n><t/><t/><t/><k1>return</k1> pages[currentPageNo];<br>
+				<n>22.</n><t/><t/>}<br>
+				<n>23.</n><t/><br>
+				<n>24.</n><t/><t/><k1>public</k1> <k2>Page</k2> GetPreviousPage()<br>
+				<n>25.</n><t/><t/>{<br>
+				<n>26.</n><t/><t/><t/>currentPageNo--;<br>
+				<n>27.</n><t/><t/><t/><k1>return</k1> pages[currentPageNo];<br>
+				<n>28.</n><t/><t/>}<br>
+				<n>29.</n><t/>}
+			</div>
+			<b>Klasė Reader:</b>	
+			<div class="code" style="vertical-align:top; text-align: left;">			
+				<n>1. </n><t/><k1>class</k1> <k2>Reader</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private</k1> <k2>Book</k2> book;<br>
+				<n>4. </n><t/><br>
+				<n>5. </n><t/><t/><k1>public</k1> <k2>Reader</k2>(<k2>Book</k2> book)<br>
+				<n>6. </n><t/><t/>{<br>
+				<n>7. </n><t/><t/><t/><k1>this</k1>.book = book;<br>
+				<n>8. </n><t/><t/>}<br>
+				<n>9. </n><t/><br>
+				<n>10.</n><t/><t/><k1>public void</k1> TurnPageForward()<br>
+				<n>11.</n><t/><t/>{<br>
+				<n>12.</n><t/><t/><t/><k1>Console</k1>.Write(book.GetNextPage());<br>
+				<n>13.</n><t/><t/>}<br>
+				<n>16.</n><t/><br>
+				<n>17.</n><t/><t/><k1>public void</k1> TurnPageBack()<br>
+				<n>18.</n><t/><t/>{<br>
+				<n>19.</n><t/><t/><t/><k1>Console</k1>.Write(book.GetPreviousPage());<br>
+				<n>20.</n><t/><t/>}<br>
+				<n>21.</n><t/>}
+			</div>
+			<b>Klasių panaudojimas:</b>	
+			<div class="code" style="vertical-align:top; text-align: left;">			
+				<n>1. </n><t/><k2>Book</k2> book = <k1>new</k1> <k2>Book</k2>(...);<br>
+				<n>2. </n><t/><k2>Reader</k2> reader = <k1>new</k1> <k2>Reader</k2>(book);<br>
+				<n>3. </n><t/>reader.TurnPageForward();<br>
+			</div>			
+		</div>
+	</div>
+	
+	<p>
+		Pavyzdyje matome, jog kiekviena klasė yra atsakinga tik už vieną dalyką. Jei reikia pakeisti atvaizdavimo stilių, tai modifikuoti reikės klasę <i>Reader</i>, nes joje aprašyta kaip bus atvaizduojama informacija, o jei reikės pakeisti atvaizduojamą informaciją, tai reikės keisti klasę <i>Book</i>, nes joje aprašytas duomenų pateikimas.
+	</p>
+	
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie <i>Single-Responsibility</i> principą:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074" class="list-group-item list-group-item-action"><u><b>Single-Responsibility Principle</b> (nuoroda į TutsPlus svetainę)</u></a>
+		</div>
+	</div>
+	<hr/>
+</div>	
+
+<div id="ocp" class="container-fluid" style="text-align:center;">
+	<h4 style="padding-top: 30px;"><b>17.2. Open/Closed Principle</b></h4>
+	
+	<p>
+		Pagal <i>Open/Closed</i> principą programos dalys (klasės, moduliai, funkcijos) turi būti &#132;uždarytos&#148; modifikavimui, bet atviros funkcionalumo praplėtimui.
+	</p>
+	<p>
+		&#132;Atviros funkcionalumo praplėtimui&#148; reiškia, kad funkcionalumas praplečiamas, kuriant naują programos dalį esamos dalies pagrindu.
+	</p>
+	<p>
+		&#132;Uždarytos modifikavimui&#148; reiškia, kad funkcionalumas praplečiamas nemodifikuojant esamos infrastruktūros.
+	</p>
+	<p>
+		Pratęskime nagrinėti pavyzdį, pradėtą nagrinėti 17.1 skyriuje. Pisiminkime, jog ankstesniame skyrelyje atskyrėme klasių atsakomybes bei jų paskirtis ir gavome klasių tarpusavio schemą pateiktą 3 pav.
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/17_2_pvz_1.jpg"><br/>
+		<b>3 pav. Ryšys tarp <i>Book</i> ir <i>Reader</i> klasių.</b><br/>
+	</p>
+	<p>
+		Pateiktoje klasių diagramoje (3 pav.) matome, jog klasių tarpusavio ryšys, jų funkcijos atitinka <a style="color: blue;" href="#srp"><u>vienafunkciškumo principą</u></a> (angl. <i>Single-Responsibility Principle</i>). Tačiau duotoji diagrama neatitinka, šiame skyrelyje aptariamo, <i>Open/Closed</i> principo, nes jei norėtume praplėsti funkcionalumą dar kitos klasės objekto, pavyzdžiui <i>AudioBook</i>, skaitymu, reikėtų modifikuoti <i>Reader</i> klasę, pritaikant ją to objekto informacijai skaityti.
+	</p>
+	<p>
+		Panagrinėkime sprendimą, atitinkantį <i>Open/Closed</i> principą (4 pav.).
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/17_2_pvz_2.jpg"><br/>
+		<b>4 pav. Patobulintas ryšys tarp <i>Book</i> ir <i>Reader</i> klasių.</b><br/>
+	</p>
+	<p>
+		Sprendimo pagrindas - atsisakyti tiesioginio ryšio tarp klasės reprezentuojančios klasę ir representuojamosios klasės. Diagramoje matome, jog neliko tiesioginio ryšio tarp <i>Reader</i> ir <i>Book</i> klasių, o panaudotas tarpininkas <i>IReadable</i> interfeisas per kurį bus sukurta sąsaja tarp šių klasių. Kadangi klasė <i>Book</i> realizuoja <i>IReadable</i> interfeisą, tai jos metodai <i>ReadNextItem()</i> ir <i>ReadPreviousItem()</i> bus prieinami klasei <i>Reader</i>.
+	</p>
+	<p>
+		Kai turimas toks klasių tarpusavio ryšys, naujų klasių pridėjimas į projektą nereikalauja didelių pokyčių kitose projekto dalyse. Pridėkime naują klasę <i>AudioBook</i> (5 pav.).
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/17_2_pvz_3.jpg"><br/>
+		<b>5 pav. Ryšys <i>Book</i> ir <i>AudioBook</i> klasių su <i>Reader</i> klase.</b><br/>
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton2" type="button" class="btn btn-link" data-toggle="collapse" data-target="#csharp2">
+			<b><u>5 pav. schemos programinė realizacija C# kalba</u></b> <img id="csharpToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp2" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Interfeisas IReadable:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>interface</k1> <k2>IReadable</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>void</k1> ReadNextItem();<br>
+				<n>4. </n><t/><t/><k1>void</k1> ReadPreviousItem();<br>
+				<n>5. </n><t/>}<br>
+			</div>
+			<b>Klasė Reader:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Reader</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private</k1> <k2>IReadable</k2> readableSource;<br>
+				<n>4. </n><t/><br>
+				<n>5. </n><t/><t/><k1>public</k1> <k2>Reader</k2>(<k2>IReadable</k2> source)<br>
+				<n>6. </n><t/><t/>{<br>
+				<n>7. </n><t/><t/><t/>readableSource = source;<br>
+				<n>8. </n><t/><t/>}<br>
+				<n>9. </n><br>
+				<n>10.</n><t/><t/><k1>public void</k1> Back()<br>
+				<n>11.</n><t/><t/>{<br>
+				<n>12.</n><t/><t/><t/>source.ReadPreviousItem();<br>
+				<n>13.</n><t/><t/>}<br>
+				<n>14. </n><br>
+				<n>15.</n><t/><t/><k1>public void</k1> Forward()<br>
+				<n>16.</n><t/><t/>{<br>
+				<n>17.</n><t/><t/><t/>source.ReadNextItem();<br>
+				<n>18.</n><t/><t/>}<br>
+				<n>19.</n><t/>}<br>
+			</div>
+			<b>Klasė Book:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Book</k2> : <k2>IReadable</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private string[]</k1> authors;<br>
+				<n>4. </n><t/><t/><k1>private string</k1> title;<br>
+				<n>5. </n><t/><t/><k1>private</k1> <k2>Page[]</k2> pages;<br>
+				<n>6. </n><t/><t/><k1>private int</k1> currentPageNo;<br>
+				<n>7. </n><t/><br>
+				<n>8. </n><t/><t/><comm>// Įprasti Book klasės get metodai</comm><br>
+				<n>8. </n><t/><t/><k1>public string[]</k1> GetAuthors()<br>
+				<n>9. </n><t/><t/>{<br>
+				<n>10.</n><t/><t/><t/><k1>return</k1> authors;<br>
+				<n>11.</n><t/><t/>}<br>
+				<n>12.</n><br>
+				<n>13.</n><t/><t/>...<br>
+				<n>14.</n><t/><t/><br>
+				<n>15. </n><t/><t/><comm>// IReadable interfeiso metodų realizacijos</comm><br>
+				<n>16.</n><t/><t/><k1>public override void</k1> ReadNextItem()<br>
+				<n>17.</n><t/><t/>{<br>
+				<n>18.</n><t/><t/><t/>currentPageNo++;<br>
+				<n>19.</n><t/><t/><t/><comm>// Kodas puslapiui atvaizduoti</comm><br>
+				<n>20.</n><t/><t/>}<br>
+				<n>21.</n><br>
+				<n>22.</n><t/><t/><k1>public override void</k1> ReadPreviousItem()<br>
+				<n>23.</n><t/><t/>{<br>
+				<n>24.</n><t/><t/><t/>currentPageNo--;<br>
+				<n>25.</n><t/><t/><t/><comm>// Kodas puslapiui atvaizduoti</comm><br>
+				<n>26.</n><t/><t/>}<br>
+				<n>27.</n><t/>}<br>
+			</div>
+			<b>Klasė AudioBook:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>AudioBook</k2> : <k2>IReadable</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private string[]</k1> authors;<br>
+				<n>4. </n><t/><t/><k1>private string</k1> title;<br>
+				<n>5. </n><t/><t/><k1>private</k1> <k2>Track[]</k2> tracks;<br>
+				<n>6. </n><t/><t/><k1>private int</k1> currentTrackNo;<br>
+				<n>7. </n><t/><br>
+				<n>8. </n><t/><t/><comm>// Įprasti AudioBook klasės get metodai</comm><br>
+				<n>8. </n><t/><t/><k1>public string[]</k1> GetAuthors()<br>
+				<n>9. </n><t/><t/>{<br>
+				<n>10.</n><t/><t/><t/><k1>return</k1> authors;<br>
+				<n>11.</n><t/><t/>}<br>
+				<n>12.</n><br>
+				<n>13.</n><t/><t/>...<br>
+				<n>14.</n><t/><t/><br>
+				<n>15. </n><t/><t/><comm>// IReadable interfeiso metodų realizacijos</comm><br>
+				<n>16.</n><t/><t/><k1>public override void</k1> ReadNextItem()<br>
+				<n>17.</n><t/><t/>{<br>
+				<n>18.</n><t/><t/><t/>currentTrackNo++;<br>
+				<n>19.</n><t/><t/><t/><comm>// Kodas garso takeliui įgarsinti</comm><br>
+				<n>20.</n><t/><t/>}<br>
+				<n>21.</n><br>
+				<n>22.</n><t/><t/><k1>public override void</k1> ReadPreviousItem()<br>
+				<n>23.</n><t/><t/>{<br>
+				<n>24.</n><t/><t/><t/>currentTrackNo--;<br>
+				<n>25.</n><t/><t/><t/><comm>// Kodas garso takeliui įgarsinti</comm><br>
+				<n>26.</n><t/><t/>}<br>
+				<n>27.</n><t/>}<br>
+			</div>	
+			<b>Klasė Main:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k2>Book</k2> book = <k1>new</k1> <k2>Book</k2>(...);<br>
+				<n>2. </n><t/><k2>AudioBook</k2> audioBook = <k1>new</k1> <k2>AudioBook</k2>(...);<br>
+				<n>3. </n><t/><k2>Reader</k2> bookReader = <k1>new</k1> <k2>Reader</k2>(book);<br>
+				<n>4. </n><t/><k2>Reader</k2> audioReader = <k1>new</k1> <k2>Reader</k2>(audioBook);<br>
+				<n>5. </n><t/><br>
+				<n>6. </n><t/><comm>// book ir audioBook skaitymas per bookReader ir audioReader objektus</comm><br>
+				<n>7. </n><t/>bookReader.ReadNextItem();<br>
+				<n>8. </n><t/>audioReader.ReadNextItem();<br>
+				<n>9. </n><t/>bookReader.ReadPreviousItem();<br>
+				<n>10.</n><t/>audioReader.ReaPreviousItem();<br>
+			</div>			
+		</div>
+	</div>
+	<p>
+		Pagalvokite, <b>(1)</b> kaip dar būtų galima patobulinti 5 pav. schemą ir <b>(2)</b> ar 5 pav. schema atitinka vienafunkciškumo principą, jei ne, tai kaip ją patobulinti, kad atitiktų.
+	</p>
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton3" type="button" class="btn btn-link" data-toggle="collapse" data-target="#csharp3">
+			<b><u>Atsakymas į (2) klausimą</u></b> <img id="csharpToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp3" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">
+			<p>
+				Pateiktoji schema netenkina vienafunkciškumo principo. Patobulinimai pateikti 5a pav.
+			</p>
+			<p style="text-align:center; padding-right: 20px;">
+				<img class="img-fluid img-thumbnail" src="pics/17_2_pvz_5a.jpg"><br/>
+				<b>5a pav. Schema, tenkinanti <i>Single-Responsibility</i> ir <i>Open/Closed</i> principus.</b><br/>
+			</p>
+			<p>
+				<i>BookController</i> klasėje apibrėžiamos operacijos su <i>Book</i> klasės objektu, o klasė <i>Book</i> saugo informaciją apie patį objektą. Prijungiant kitą elementą, reikia sukurti atitinkamą kontrolerį ir klasę reprezentuojančią tą elementą (5b pav.).
+			</p>
+			<p style="text-align:center; padding-right: 20px;">
+				<img class="img-fluid img-thumbnail" src="pics/17_2_pvz_5b.jpg"><br/>
+				<b>5b pav. 5a schemos praplėtimas nauju elementu.</b><br/>
+			</p>
+		</div>
+	</div>
+	<p>
+		Bendra <i>Open/Closed</i> principo realizavimo scema pateikta 6 pav.
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/17_2_pvz_4.jpg"><br/>
+		<b>6 pav. Bendra <i>Open/Closed</i> principo realizavimo schema.</b><br/>
+	</p>
+	
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie <i>Open/Closed</i> principą:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://code.tutsplus.com/tutorials/solid-part-2-the-openclosed-principle--net-36600" class="list-group-item list-group-item-action"><u><b>Open/Closed Principle</b> (nuoroda į TutsPlus svetainę)</u></a>
+		</div>
+	</div>
+	<hr/>
+</div>
+
+<div id="lsp" class="container-fluid" style="text-align:center;">
+	<h4 style="padding-top: 30px;"><b>17.3. Liskov Substitution Principle</b></h4>
+	
+	<p>
+		Barbara Liskov 1988 m. suformulavo principą, kuris sako, kad kiekvieną bazinės klasės objektą pakeitus poklasės objektu, programos elgsena privalo nepakisti. Panagrinėkime pavyzdį (7 pav.). 
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/17_3_pvz_1.jpg"><br/>
+		<b>7 pav. Klasikinis <i>Rectangle</i> - <i>Square</i> pavyzdys.</b><br/>
+	</p>
+	<p>
+		Panagrinėkime, kuo šis pavyzdys yra pažeidžiantis Liskov principą. Geometriškai, kvadratas yra stačiakampis, tačiau šiuo atveju objektiniame programavime taip nėra. Panagrinėkime kodą.
+	</p>
+	<div class="container-fluid" style="text-align:left;">
+		<div class="border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Klasė <i>Rectangle</i>:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Rectangle</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>protected double</k1> width;<br>
+				<n>4. </n><t/><t/><k1>protected double</k1> height;<br>
+				<n>5. </n><t/><br>
+				<n>6. </n><t/><t/><k1>public virtual void</k1> SetWidth(<k1>double</k1> width)<br>
+				<n>7. </n><t/><t/>{<br>
+				<n>8. </n><t/><t/><t/><k1>this</k1>.width = width;<br>
+				<n>9. </n><t/><t/>}<br>
+				<n>10.</n><t/><br>
+				<n>11.</n><t/><t/><k1>public virtual void</k1> SetHeight(<k1>double</k1> height)<br>
+				<n>12.</n><t/><t/>{<br>
+				<n>13.</n><t/><t/><t/><k1>this</k1>.height = height;<br>
+				<n>14.</n><t/><t/>}<br>
+				<n>15.</n><t/><br>
+				<n>16.</n><t/><t/><k1>public virtual double</k1> GetAreaSize()<br>
+				<n>18.</n><t/><t/>{<br>
+				<n>19.</n><t/><t/><t/><k1>return</k1> width * height;<br>
+				<n>20.</n><t/><t/>}<br>
+				<n>21.</n><t/>}
+			</div>
+			<b>Klasė <i>Square</i>:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Rectangle</k2> : <k2>Square</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>public override void</k1> SetWidth(<k1>double</k1> width)<br>
+				<n>4. </n><t/><t/>{<br>
+				<n>5. </n><t/><t/><t/><k1>this</k1>.width = width;<br>
+				<n>6. </n><t/><t/><t/><k1>this</k1>.height = width;<br>
+				<n>7. </n><t/><t/>}<br>
+				<n>8. </n><t/><br>
+				<n>9 .</n><t/><t/><k1>public override void</k1> SetHeight(<k1>double</k1> height)<br>
+				<n>10.</n><t/><t/>{<br>
+				<n>11.</n><t/><t/><t/><k1>this</k1>.height = height;<br>
+				<n>12.</n><t/><t/><t/><k1>this</k1>.width = height;<br>
+				<n>13.</n><t/><t/>}<br>
+				<n>14.</n><t/>}
+			</div>
+			<b>Metodas <i>Main</i>:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>void</k1> Main()<br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k2>Rectangle</k2> rectangle = <k1>new</k1> <k2>Rectangle</k2>();<br>
+				<n>4. </n><t/><t/><k2>Square</k2> square = <k1>new</k1> <k2>Square</k2>();<br>
+				<n>5. </n><t/><t/>rectangle.SetWidth(9);<br>
+				<n>6. </n><t/><t/>rectangle.SetHeight(5);<br>
+				<n>7. </n><t/><t/>square.SetWidth(9);<br>
+				<n>8. </n><t/><t/>square.SetHeight(5);<br>
+				<n>9. </n><t/><t/>DisplayResult(rectangle); <comm>// atsakymas: 45</comm><br>
+				<n>10.</n><t/><t/>DisplayResult(square); <comm>// atsakymas: 25</comm><br>
+				<n>11.</n><t/>}
+			</div>
+			<b>Metodas <i>DisplayResult</i>:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>void</k1> DisplayResult(<k2>Rectangle</k2> rectangle)<br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k2>Console</k2>.WriteLine(<quot>$&quot;</quot>{rectangle.GetAreaSize()}<quot>&quot;</quot>);<br>
+				<n>4. </n><t/>}
+			</div>
+		</div>
+	</div>
+	<p>
+		Pateiktame pavyzdyje matome Liskov principo pažeidimą, kvadrato atveju, nes nustačius plotį 9, ilgį 5 gauname 25, nors pagal bazinę klasę turėtume gauti 45. Taip nutiko, nes poklasėje perrašėme <i>SetWidth</i> metodą, kuriame iš karto keitėme abiejų atributų reikšmes, nors bazinėje klasėje keičiama tik vieno atributo <i>width</i> reikšmė. Metode <i>SetHeight</i> - taip pat.
+	</p>
+	<p>
+		Vengiant Liskov principo pažeidimo reikia vadovautis šiomis taisyklėmis:
+		<ul class="list-group list-group-flush" style="text-align:left;">
+			<li class="list-group-item" style="background-color: #d9dbf1;"><b>1.</b> Išankstinė sąlyga (angl. <i>precondition</i>) poklasėje privalo išlikti nesustiprinta bazinės klasės atžvilgiu.</li>
+			<li class="list-group-item" style="background-color: #d9dbf1;"><b>2.</b> Galutinė sąlyga (angl. <i>postcondition</i>) poklasėje privalo išlikti nesusilpninta bazinės klasės atžvilgiu.</li>
+			<li class="list-group-item" style="background-color: #d9dbf1;"><b>3.</b> Jei bazinėje klasėje yra nekintamų dydžių, pavyzdžiui, inicializuotų objekto konstravimo metu, tai poklasėje tas dydis privalo taip pat išlikti nekintantis per visą objekto gyvavimo ciklą.</li>
+		</ul>
+	</p>
+	<p>
+		Jei bazinėje klasėje apibrėžta, kad kintamojo reikšmė turi būti tarp skaičių 0 ir 200, o poklasėje apibrėžta, kad tarp 0 ir 100, tai bus <b>išankstinės sąlygos</b> pažeidimas, nes sustiprintas reikalavimas. Jei bazinėje klasėje apibrėžta, kad grąžinama teigiama reikšmė, o poklasėje leidžiama grąžinti neigiamą, tai bus <b>galutinės sąlygos</b> pažeidimas, nes susilpninamas reikalavimas.
+	</p>
+	
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie <i>Liskov Substitution</i> principą:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://code.tutsplus.com/tutorials/solid-part-3-liskov-substitution-interface-segregation-principles--net-36710" class="list-group-item list-group-item-action"><u><b>Liskov Substitution Principle</b> (nuoroda į TutsPlus svetainę)</u></a>
+		</div>
+	</div>
+	<hr/>
+</div>
+
+<div id="isp" class="container-fluid" style="text-align:center;">
+	<h4 style="padding-top: 30px;"><b>17.4. Interface Segregation Principle</b></h4>
+	
+	<p>
+		Atskyrimo interfeisais principas (angl. <i>Interface Segregation Principle</i>) sako, kad klasės neturėtų priklausyti nuo metodų, kurie tai klasei nereikalingi arba neprasmingi. Panagrinėkime pavyzdį (8 pav.).
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/17_4_pvz_1.jpg"><br/>
+		<b>8 pav. Atskyrimo interfeisais principo pažeidimo pavyzdys.</b><br/>
+	</p>
+	<p>
+		Pateikto pavyzdžio schemoje principas pažeidžiamas tuo, kad yra tam tikrų metodų bazinėse klasėse, kurie neturi prasmės tam tikrose poklasėse. Pavyzdžiui, metodai <i>MakeSound()</i> ir <i>Walk()</i> bazinėje <i>Animal</i> klasėje, neturi prasmės poklasėje <i>Shark</i>. Metodas <i>Fly()</i> bazinėje klasėje <i>Bird</i>, neturi prasmės poklasėje <i>Kiwi</i>, nes šie paukščiai neskraido.
+	</p>
+	<p>
+		Pagal šiame skyriuje nagrinėjamą principą, bazinėje klasėje turi būti tik tie metodai, kurie būdingi ir prasmingi visoms tos klasės poklasėms. Išskirtiniai metodai turi būti prijungti per interfeisus. Panagrinėkime pavyzdį (9 pav.).
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/17_4_pvz_2.jpg"><br/>
+		<b>9 pav. Atskyrimo interfeisais principo naudojimo pavyzdys.</b><br/>
+	</p>
+	<p>
+		Pagal 9 pav. schemą, kiekvienas bet kurios klasės egzempliorius, bus <i>Animal</i> klasės egzempliorius, turintis metodus, kurie yra būdingi ir prasmingi pagal jo prigimtį ar paskirtį. Pavyzdžiui, <i>Kiwi</i> klasė, turės, paveldėtas operacijas iš klasės <i>Bird</i> (metodai <i>Eat()</i>, <i>Walk()</i> ir <i>MakeSound()</i>), tuo tarpu <i>Eagle</i> klasė, papildomai, per interfeisą <i>IFlying</i>, metodą <i>Fly()</i>.
+	</p>
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie <i>Interface Segregation</i> principą:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://code.tutsplus.com/tutorials/solid-part-3-liskov-substitution-interface-segregation-principles--net-36710" class="list-group-item list-group-item-action"><u><b>Interface Segregation Principle</b> (nuoroda į TutsPlus svetainę)</u></a>
+		</div>
+	</div>
+	<hr/>
+</div>
+
+
+<div id="dip" class="container-fluid" style="text-align:center;">
+	<h4 style="padding-top: 30px;"><b>17.5. Dependency-Inversion Principle</b></h4>
+	
+	<p>
+		Priklausomybės inversijos principas (angl. <i>Dependency-Inversion Principle</i>) sako, kad aukštesnio lygmens moduliai neturėtų priklausyti nuo žemesnio lygmens modulių. Visi moduliai turėtų priklausyti nuo abstrakcijų. Abstrakcijos neturėtų priklausyti nuo konkrečių realizacijų, realizacijos turėtų priklausyti nuo abstrakcijų. Šio principo iliustracijai tinka 17.2 skyrelyje nagrinėta schema, panagrinėkime ją dar kartą (10 pav.).
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/17_2_pvz_2.jpg"><br/>
+		<b>10 pav. Priklausomybės inversijos principo realizavimo pavyzdys.</b><br/>
+	</p>
+	<p>
+		Šiame pavyzdyje matome, jog klasė <i>Book</i> nėra tiesiogiai susieta su klase <i>Reader</i>. Klasės tarpsavyje susietos per interfeisą (abstrakciją) <i>IReadable</i>.
+	</p>
+	
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie <i>Dependency-Inversion</i> principą:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://code.tutsplus.com/tutorials/solid-part-4-the-dependency-inversion-principle--net-36872" class="list-group-item list-group-item-action"><u><b>Dependency-Inversion Principle</b> (nuoroda į TutsPlus svetainę)</u></a>
+		</div>
+	</div>
+	<hr/>
+</div>

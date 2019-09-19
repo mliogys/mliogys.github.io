@@ -1,0 +1,591 @@
+<div class="container-fluid">
+	<p>
+		Skyrelyje apie <a href="oop.html?page=12">delegatus</a> kalbėjome apie dvikrypčio komunikavimo tarp objektų principus ir išsiaiškinome, kad galima naudoti interfeisus arba delegatus (C# kalboje). Šiame skyrelyje aptarsime dar vieną būdą dvikryptei komunikacijai realizuoti.
+	</p>
+	
+	<p>
+		Dvikryptė komunikacija dar gali būti realizuojama naudojant ir įvykius (C#, Python kalbose <i>event</i>, Java kalboje <i>ActionListener</i>). Panagrinėkime žemiau esantį paveikslėlį (1 pav.).
+	</p>
+	
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/12_pvz_1.jpg"><br/>
+		<b>1 pav. Ryšys tarp <i>Car</i>, <i>FrontLights</i>, <i>Engine</i> ir <i>ParkingBrakes</i> klasių.</b><br/>
+	</p>
+	<p>
+		Paveikslėlyje matome, kad automobilis (<i>Car</i>) sudarytas iš sudėtinių dalių: variklio (<i>Engine</i>), parkavimo stabdžių (<i>ParkingBrakes</i>) ir priekinių šviestuvų (<i>FrontLights</i>). Kiekviena dalis yra atskiras automobilio klasės narys, valdomas iš <i>Car</i> klasės vidaus. Nors tai ir atskiros dalys, bet jos tarpusavyje, šiuolaikiniuose automobiliuose, yra susietos, pavyzdžiui, kai automobilis sustoja ir išjungiamas variklis, automatiškai įsijungia parkavimo stabdis ar kai automobilio variklis išjungiamas/įjungiamas priekiniai žibintai išjungiami/įjungiami. Tokį funkcionalumą galima realizuoti trimis būdais: tiesiogiai apjungiant atskirų objektų operacijas klasės <i>Car</i> metoduose, naudojant delegatus ir naudojant įvykius. Panagrinėkimą tiesioginio apjungimo pavyzdį.
+	</p>
+		
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#csharp1">
+			<b><u>C# pavyzdys Nr. 1</u></b> <img id="csharpToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Klasė Engine:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Engine</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private double</k1> currentPower = 0;<br>
+				<n>4. </n><t/><t/><k1>private bool</k1> isOn = <k1>false</k1>;<br>
+				<n>5. </n><t/><br>
+				<n>6. </n><t/><t/><k1>public void</k1> TurnOn()<br>
+				<n>7. </n><t/><t/>{<br>
+				<n>8. </n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>9. </n><t/><t/>}<br>
+				<n>10.</n><br>
+				<n>11.</n><t/><t/><k1>public void</k1> TurnOff()<br>
+				<n>12.</n><t/><t/>{<br>
+				<n>13.</n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>14.</n><t/><t/><t/>currentPower = 0;<br>
+				<n>15.</n><t/><t/>}<br>
+				<n>16.</n><t/><t/>..................<br>
+				<n>17.</n><t/>}<br>
+			</div>
+			<b>Klasė FrontLights:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>FrontLights</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private bool</k1> isOn = <k1>false</k1>;<br>
+				<n>4. </n><t/><br>
+				<n>5. </n><t/><t/><k1>public void</k1> TurnOn()<br>
+				<n>6. </n><t/><t/>{<br>
+				<n>7. </n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>8. </n><t/><t/>}<br>
+				<n>9. </n><br>
+				<n>10.</n><t/><t/><k1>public void</k1> TurnOff()<br>
+				<n>11.</n><t/><t/>{<br>
+				<n>12.</n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>13.</n><t/><t/>}<br>
+				<n>14.</n><t/>}<br>
+			</div>
+			<b>Klasė ParkingBrakes:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>ParkingBrakes</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private bool</k1> isOn = <k1>true</k1>;<br>
+				<n>4. </n><t/><br>
+				<n>5. </n><t/><t/><k1>public void</k1> TurnOn()<br>
+				<n>6. </n><t/><t/>{<br>
+				<n>7. </n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>8. </n><t/><t/>}<br>
+				<n>9. </n><br>
+				<n>10.</n><t/><t/><k1>public void</k1> TurnOff()<br>
+				<n>11.</n><t/><t/>{<br>
+				<n>12.</n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>13.</n><t/><t/>}<br>
+				<n>14.</n><t/>}<br>
+			</div>
+			<b>Klasė Car:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Car</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private</k1> <k2>Engine</k2> engine = <k1>new</k1> <k2>Engine</k2>();<br>
+				<n>4. </n><t/><t/><k1>private</k1> <k2>ParkingBrakes</k2> parkingBrakes = <k1>new</k1> <k2>ParkingBrakes</k2>();<br>
+				<n>5. </n><t/><t/><k1>private</k1> <k2>FrontLights</k2> frontLights = <k1>new</k1> <k2>FrontLights</k2>();<br>
+				<n>6. </n><br>
+				<n>7. </n><t/><t/><k1>public void</k1> StartEngine()<br>
+				<n>8. </n><t/><t/>{<br>
+				<n>9. </n><t/><t/><t/>engine.TurnOn();<br>
+				<n>10.</n><t/><t/><t/>frontLights.TurnOn();<br>
+				<n>11.</n><t/><t/>}<br>
+				<n>12.</n><t/><br>
+				<n>13.</n><t/><t/><k1>public void</k1> StopEngine()<br>
+				<n>14.</n><t/><t/>{<br>
+				<n>15.</n><t/><t/><t/>engine.TurnOff();<br>
+				<n>16.</n><t/><t/><t/>frontLights.TurnOff();<br>
+				<n>17.</n><t/><t/><t/>parkingBrakes.TurnOn();<br>
+				<n>18.</n><t/><t/>}<br>
+				<n>19.</n><t/>}<br>
+			</div>			
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#java1">
+			<b><u>Java pavyzdys Nr. 1</u></b> <img id="javaToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Klasė Engine:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Engine</k2> {<br>
+				<n>2. </n><t/><t/><k1>private double</k1> currentPower = 0;<br>
+				<n>3. </n><t/><t/><k1>private bool</k1> isOn = <k1>false</k1>;<br>
+				<n>4. </n><t/><br>
+				<n>5. </n><t/><t/><k1>public void</k1> turnOn() {<br>
+				<n>6. </n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>7. </n><t/><t/>}<br>
+				<n>8. </n><br>
+				<n>9. </n><t/><t/><k1>public void</k1> turnOff() {<br>
+				<n>10.</n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>11.</n><t/><t/><t/>currentPower = 0;<br>
+				<n>12.</n><t/><t/>}<br>
+				<n>13.</n><t/><t/>..................<br>
+				<n>14.</n><t/>}<br>
+			</div>
+			<b>Klasė FrontLights:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>FrontLights</k2> {<br>
+				<n>2. </n><t/><t/><k1>private bool</k1> isOn = <k1>false</k1>;<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><t/><k1>public void</k1> turnOn() {<br>
+				<n>5. </n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>6. </n><t/><t/>}<br>
+				<n>7. </n><br>
+				<n>8. </n><t/><t/><k1>public void</k1> turnOff() {<br>
+				<n>9. </n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>10.</n><t/><t/>}<br>
+				<n>11.</n><t/>}<br>
+			</div>
+			<b>Klasė ParkingBrakes:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>ParkingBrakes</k2> {<br>
+				<n>2. </n><t/><t/><k1>private bool</k1> isOn = <k1>true</k1>;<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><t/><k1>public void</k1> turnOn() {<br>
+				<n>5. </n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>6. </n><t/><t/>}<br>
+				<n>7. </n><br>
+				<n>8. </n><t/><t/><k1>public void</k1> turnOff() {<br>
+				<n>9. </n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>10.</n><t/><t/>}<br>
+				<n>11.</n><t/>}<br>
+			</div>
+			<b>Klasė Car:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Car</k2> {<br>
+				<n>2. </n><t/><t/><k1>private</k1> <k2>Engine</k2> engine = <k1>new</k1> <k2>Engine</k2>();<br>
+				<n>3. </n><t/><t/><k1>private</k1> <k2>ParkingBrakes</k2> parkingBrakes = <k1>new</k1> <k2>ParkingBrakes</k2>();<br>
+				<n>4. </n><t/><t/><k1>private</k1> <k2>FrontLights</k2> frontLights = <k1>new</k1> <k2>FrontLights</k2>();<br>
+				<n>5. </n><br>
+				<n>6. </n><t/><t/><k1>public void</k1> startEngine() {<br>
+				<n>7. </n><t/><t/><t/>engine.turnOn();<br>
+				<n>8. </n><t/><t/><t/>frontLights.turnOn();<br>
+				<n>9. </n><t/><t/>}<br>
+				<n>10.</n><t/><br>
+				<n>11.</n><t/><t/><k1>public void</k1> stopEngine() {<br>
+				<n>12.</n><t/><t/><t/>engine.turnOff();<br>
+				<n>13.</n><t/><t/><t/>frontLights.turnOff();<br>
+				<n>14.</n><t/><t/><t/>parkingBrakes.turnOn();<br>
+				<n>15.</n><t/><t/>}<br>
+				<n>16.</n><t/>}<br>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#python1">
+			<b><u>Python pavyzdys Nr. 1</u></b> <img id="pythonToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Klasė Engine:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Engine</k2>:<br>
+				<n>2. </n><t/><t/>_currentPower = 0<br>
+				<n>3. </n><t/><t/>_is_on = <k1>False</k1><br>
+				<n>4. </n><t/><br>
+				<n>5. </n><t/><t/><k1>def</k1> turn_on(<k2>self</k2>):<br>
+				<n>6. </n><t/><t/><t/><k2>self</k2>._is_on = <k1>True</k1><br>
+				<n>7. </n><br>
+				<n>8. </n><t/><t/><k1>def</k1> turn_off(<k2>self</k2>):<br>
+				<n>9. </n><t/><t/><t/><k2>self</k2>._is_on = <k1>False</k1><br>
+				<n>10.</n><t/><t/><t/><k2>self</k2>._current_power = 0<br>
+				<n>11.</n><t/><t/>..................<br>
+			</div>
+			<b>Klasė FrontLights:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>FrontLights</k2>:<br>
+				<n>2. </n><t/><t/>_is_on = <k1>False</k1><br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><t/><k1>def</k1> turn_on(<k2>self</k2>):<br>
+				<n>5. </n><t/><t/><t/><k2>self</k2>._is_on = <k1>True</k1><br>
+				<n>6. </n><br>
+				<n>7. </n><t/><t/><k1>def</k1> turn_off(<k2>self</k2>):<br>
+				<n>8. </n><t/><t/><t/><k2>self</k2>._is_on = <k1>False</k1><br>
+			</div>
+			<b>Klasė ParkingBrakes:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>ParkingBrakes</k2>:<br>
+				<n>2. </n><t/><t/>_is_on = <k1>True</k1><br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><t/><k1>def</k1> turn_on(<k2>self</k2>):<br>
+				<n>5. </n><t/><t/><t/><k2>self</k2>._is_on = <k1>True</k1><br>
+				<n>6. </n><br>
+				<n>7. </n><t/><t/><k1>def</k1> turn_off(<k2>self</k2>):<br>
+				<n>8. </n><t/><t/><t/><k2>self</k2>._is_on = <k1>False</k1><br>
+			</div>
+			<b>Klasė Car:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Car</k2>:<br>
+				<n>2. </n><t/><t/>_engine = <k2>Engine</k2>()<br>
+				<n>3. </n><t/><t/>_parking_brakes = <k2>ParkingBrakes</k2>()<br>
+				<n>4. </n><t/><t/>_front_lights = <k2>FrontLights</k2>()<br>
+				<n>5. </n><br>
+				<n>6. </n><t/><t/><k1>def</k1> start_engine(<k2>self</k2>):<br>
+				<n>7. </n><t/><t/><t/><k2>self</k2>._engine.turn_on()<br>
+				<n>8. </n><t/><t/><t/><k2>self</k2>._front_lights.turn_on()<br>
+				<n>9. </n><t/><br>
+				<n>10.</n><t/><t/><k1>def</k1> stop_engine(<k2>self</k2>):<br>
+				<n>11.</n><t/><t/><t/><k2>self</k2>._engine.turn_off()<br>
+				<n>12.</n><t/><t/><t/><k2>self</k2>._front_lights.turn_off()<br>
+				<n>13.</n><t/><t/><t/><k2>self</k2>._parking_brakes.turn_on()<br>
+			</div>
+		</div>
+	</div>
+	
+	<p>
+		Pirmo pavyzdžio sprendimas nėra pats geriausias sprendimas. Įsivaizduokime, kad vairuotojas pats gali nuspręsti savo automobilio elgseną: ar išjungti žibintus išjungiant variklį, ar automatiškai įjungti stovėjimo stabdį ir t.t. Norint įdiegti tokį funkcionalumą, rekėtų labai daug sąlygos sakinių, tikrinančių ar vairuotojas pasirinko vieną ar kitą funkciją. Sprendimas taptų labai painus. Naudojant delegatus (C# kalboje) ar įvykius (<i>event</i>, <i>ActionListener</i>) sprendimas supaprastėja. Panagrinėkime įvykių pavyzdį.
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton2" type="button" class="btn btn-link" data-toggle="collapse" data-target="#csharp2">
+			<b><u>C# pavyzdys Nr. 2</u></b> <img id="csharpToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp2" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Klasė Engine:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Engine</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>public event</k1> <k2>EventHandler</k2> OnEngineOn;<br>
+				<n>4. </n><t/><t/><k1>public event</k1> <k2>EventHandler</k2> OnEngineOff;<br>
+				<n>5. </n><br>
+				<n>6. </n><t/><t/><k1>private double</k1> currentPower = 0;<br>
+				<n>7. </n><t/><t/><k1>private bool</k1> isOn = <k1>false</k1>;<br>
+				<n>8. </n><t/><br>
+				<n>9. </n><t/><t/><k1>public void</k1> TurnOn()<br>
+				<n>10.</n><t/><t/>{<br>
+				<n>11.</n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>12.</n><t/><t/><t/><k1>if</k1> (OnEngineOn != <k1>null</k1>)<br>
+				<n>13.</n><t/><t/><t/><t/>OnEngineOn(<k1>this</k1>, <k1>null</k1>);<br>
+				<n>14.</n><t/><t/>}<br>
+				<n>15.</n><br>
+				<n>16.</n><t/><t/><k1>public void</k1> TurnOff()<br>
+				<n>17.</n><t/><t/>{<br>
+				<n>18.</n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>19.</n><t/><t/><t/>currentPower = 0;<br>
+				<n>20.</n><t/><t/><t/><k1>if</k1> (OnEngineOff != <k1>null</k1>)<br>
+				<n>21.</n><t/><t/><t/><t/>OnEngineOff(<k1>this</k1>, <k1>null</k1>);<br>
+				<n>22.</n><t/><t/>}<br>
+				<n>23.</n><t/><t/>..................<br>
+				<n>24.</n><t/>}<br>
+			</div>
+			<b>Klasė FrontLights:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>FrontLights</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private bool</k1> isOn = <k1>false</k1>;<br>
+				<n>4. </n><t/><br>
+				<n>5. </n><t/><t/><k1>public void</k1> TurnOn()<br>
+				<n>6. </n><t/><t/>{<br>
+				<n>7. </n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>8. </n><t/><t/>}<br>
+				<n>9. </n><br>
+				<n>10.</n><t/><t/><k1>public void</k1> TurnOff()<br>
+				<n>11.</n><t/><t/>{<br>
+				<n>12.</n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>13.</n><t/><t/>}<br>
+				<n>14.</n><t/>}<br>
+			</div>
+			<b>Klasė ParkingBrakes:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>ParkingBrakes</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private bool</k1> isOn = <k1>true</k1>;<br>
+				<n>4. </n><t/><br>
+				<n>5. </n><t/><t/><k1>public void</k1> TurnOn()<br>
+				<n>6. </n><t/><t/>{<br>
+				<n>7. </n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>8. </n><t/><t/>}<br>
+				<n>9. </n><br>
+				<n>10.</n><t/><t/><k1>public void</k1> TurnOff()<br>
+				<n>11.</n><t/><t/>{<br>
+				<n>12.</n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>13.</n><t/><t/>}<br>
+				<n>14.</n><t/>}<br>
+			</div>
+			<b>Klasė Car:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Car</k2><br>
+				<n>2. </n><t/>{<br>
+				<n>3. </n><t/><t/><k1>private</k1> <k2>Engine</k2> engine = <k1>new</k1> <k2>Engine</k2>();<br>
+				<n>4. </n><t/><t/><k1>private</k1> <k2>ParkingBrakes</k2> parkingBrakes = <k1>new</k1> <k2>ParkingBrakes</k2>();<br>
+				<n>5. </n><t/><t/><k1>private</k1> <k2>FrontLights</k2> frontLights = <k1>new</k1> <k2>FrontLights</k2>();<br>
+				<n>6. </n><br>
+				<n>7. </n><t/><t/><comm>// Priskiriame įvykius, kurie seks po variklio įjungimo/išjungimo</comm><br>
+				<n>8. </n><t/><t/><k1>public</k1> Car()<br>
+				<n>9. </n><t/><t/>{<br>
+				<n>10.</n><t/><t/><t/>engine.OnEngineOn += TurnFrontLights_On;<br>
+				<n>12.</n><t/><t/><t/>engine.OnEngineOff += TurnFrontLights_Off;<br>
+				<n>13.</n><t/><t/><t/>engine.OnEngineOff += TurnParkingBrakes_On;<br>
+				<n>14.</n><t/><t/>}<br>
+				<n>15.</n><t/><br>
+				<n>16.</n><t/><t/><k1>private void</k1> TurnFrontLights_On()<br>
+				<n>17.</n><t/><t/>{<br>
+				<n>18.</n><t/><t/><t/>frontLights.TurnOn();<br>
+				<n>19.</n><t/><t/>}<br>
+				<n>20.</n><t/><br>
+				<n>21.</n><t/><t/><k1>private void</k1> TurnFrontLights_Off()<br>
+				<n>22.</n><t/><t/>{<br>
+				<n>23.</n><t/><t/><t/>frontLights.TurnOff();<br>
+				<n>24.</n><t/><t/>}<br>
+				<n>25.</n><t/><br>
+				<n>26.</n><t/><t/><k1>private void</k1> TurnParkingBrakes_On()<br>
+				<n>27.</n><t/><t/>{<br>
+				<n>28.</n><t/><t/><t/>parkingBrakes.TurnOn();<br>
+				<n>29.</n><t/><t/>}<br>
+				<n>30.</n><t/><br>
+				<n>31.</n><t/><t/><k1>public void</k1> StartEngine()<br>
+				<n>32.</n><t/><t/>{<br>
+				<n>33.</n><t/><t/><t/>engine.TurnOn();<br>
+				<n>34.</n><t/><t/><t/>frontLights.TurnOn();<br>
+				<n>35.</n><t/><t/>}<br>
+				<n>36.</n><t/><br>
+				<n>37.</n><t/><t/><k1>public void</k1> StopEngine()<br>
+				<n>38.</n><t/><t/>{<br>
+				<n>39.</n><t/><t/><t/>engine.TurnOff();<br>
+				<n>40.</n><t/><t/><t/>frontLights.TurnOff();<br>
+				<n>41.</n><t/><t/><t/>parkingBrakes.TurnOn();<br>
+				<n>42.</n><t/><t/>}<br>
+				<n>43.</n><t/>}<br>
+			</div>			
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton2" type="button" class="btn btn-link" data-toggle="collapse" data-target="#java2">
+			<b><u>Java pavyzdys Nr. 2</u></b> <img id="javaToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java2" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">	
+			<b>Interfeisas ActionListener:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>public interface</k1> <k2>ActionListener</k2> {<br>
+				<n>2. </n><t/><t/><k1>void</k1> onAction();<br>
+				<n>3. </n><t/>}<br>
+			</div>
+			<b>Klasė Engine:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Engine</k2> {<br>
+				<n>2. </n><t/><t/><k1>public</k1> <k2>List</k2><<k2>ActionListener</k2>> engineOnActions;<br>
+				<n>3. </n><t/><t/><k1>public</k1> <k2>List</k2><<k2>ActionListener</k2>> engineOffActions;<br>
+				<n>4. </n><t/><br>
+				<n>5. </n><t/><t/><k1>private double</k1> currentPower = 0;<br>
+				<n>6. </n><t/><t/><k1>private bool</k1> isOn = <k1>false</k1>;<br>
+				<n>7. </n><t/><br>
+				<n>8. </n><t/><t/><k1>public void</k1> turnOn() {<br>
+				<n>9. </n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>10.</n><t/><t/><t/><k1>if</k1> (engineOnActions != <k1>null</k1>) {<br>
+				<n>11.</n><t/><t/><t/><t/><k1>for</k1> (<k2>ActionListener</k2> listener : engineOnActions) {<br>
+				<n>12.</n><t/><t/><t/><t/><t/>listener.OnAction();<br>
+				<n>13.</n><t/><t/><t/><t/>}<br>
+				<n>14.</n><t/><t/><t/>}<br>
+				<n>15.</n><t/><t/>}<br>
+				<n>16.</n><br>
+				<n>17.</n><t/><t/><k1>public void</k1> turnOff() {<br>
+				<n>18.</n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>19.</n><t/><t/><t/>currentPower = 0;<br>
+				<n>20.</n><t/><t/><t/><k1>if</k1> (engineOffActions != <k1>null</k1>) {<br>
+				<n>21.</n><t/><t/><t/><t/><k1>for</k1> (<k2>ActionListener</k2> listener : engineOffActions) {<br>
+				<n>22.</n><t/><t/><t/><t/><t/>listener.OnAction();<br>
+				<n>23.</n><t/><t/><t/><t/>}<br>
+				<n>24.</n><t/><t/><t/>}<br>
+				<n>25.</n><t/><t/>}<br>
+				<n>26.</n><t/><t/>..................<br>
+				<n>27.</n><t/>}<br>
+			</div>
+			<b>Klasė FrontLights:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>FrontLights</k2> {<br>
+				<n>2. </n><t/><t/><k1>private bool</k1> isOn = <k1>false</k1>;<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><t/><k1>public void</k1> turnOn() {<br>
+				<n>5. </n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>6. </n><t/><t/>}<br>
+				<n>7. </n><br>
+				<n>8. </n><t/><t/><k1>public void</k1> turnOff() {<br>
+				<n>9. </n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>10.</n><t/><t/>}<br>
+				<n>11.</n><t/>}<br>
+			</div>
+			<b>Klasė ParkingBrakes:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>ParkingBrakes</k2> {<br>
+				<n>2. </n><t/><t/><k1>private bool</k1> isOn = <k1>true</k1>;<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><t/><k1>public void</k1> turnOn() {<br>
+				<n>5. </n><t/><t/><t/>isOn = <k1>true</k1>;<br>
+				<n>6. </n><t/><t/>}<br>
+				<n>7. </n><br>
+				<n>8. </n><t/><t/><k1>public void</k1> turnOff() {<br>
+				<n>9. </n><t/><t/><t/>isOn = <k1>false</k1>;<br>
+				<n>10.</n><t/><t/>}<br>
+				<n>11.</n><t/>}<br>
+			</div>
+			<b>Klasė Car:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Car</k2> {<br>
+				<n>2. </n><t/><t/><k1>private</k1> <k2>List</k2><<k2>ActionListener</k2>> engineOnListeners = <k1>new</k1> ArrayList();<br>
+				<n>3. </n><t/><t/><k1>private</k1> <k2>List</k2><<k2>ActionListener</k2>> engineOffListeners = <k1>new</k1> ArrayList();<br>
+				<n>4. </n><br>
+				<n>5. </n><t/><t/><k1>private</k1> <k2>Engine</k2> engine = <k1>new</k1> <k2>Engine</k2>();<br>
+				<n>6. </n><t/><t/><k1>private</k1> <k2>ParkingBrakes</k2> parkingBrakes = <k1>new</k1> <k2>ParkingBrakes</k2>();<br>
+				<n>7. </n><t/><t/><k1>private</k1> <k2>FrontLights</k2> frontLights = <k1>new</k1> <k2>FrontLights</k2>();<br>
+				<n>8. </n><br>
+				<n>9. </n><t/><t/><comm>// Priskiriame įvykius, kurie seks po variklio įjungimo/išjungimo</comm><br>
+				<n>10.</n><t/><t/><k1>public</k1> Car() {<br>
+				<n>11.</n><t/><t/><t/>engineOnListeners.add(<k1>new</k1> <k2>ActionListener</k2>() {<br>
+				<n>12.</n><t/><t/><t/><t/>@Override<br>
+				<n>13.</n><t/><t/><t/><t/><k1>public void</k1> OnAction() {<br>
+				<n>14.</n><t/><t/><t/><t/><t/>frontLights.turnOn();<br>
+				<n>15.</n><t/><t/><t/><t/>}<br>
+				<n>16.</n><t/><t/><t/>});<br>
+				<n>17.</n><t/><br>
+				<n>18.</n><t/><t/><t/>engineOffListeners.add(<k1>new</k1> <k2>ActionListener</k2>() {<br>
+				<n>19.</n><t/><t/><t/><t/>@Override<br>
+				<n>20.</n><t/><t/><t/><t/><k1>public void</k1> OnAction() {<br>
+				<n>21.</n><t/><t/><t/><t/><t/>frontLights.turnOff();<br>
+				<n>22.</n><t/><t/><t/><t/>}<br>
+				<n>23.</n><t/><t/><t/>});<br>
+				<n>24.</n><t/><br>
+				<n>25.</n><t/><t/><t/>engineOffListeners.add(<k1>new</k1> <k2>ActionListener</k2>() {<br>
+				<n>26.</n><t/><t/><t/><t/>@Override<br>
+				<n>27.</n><t/><t/><t/><t/><k1>public void</k1> OnAction() {<br>
+				<n>28.</n><t/><t/><t/><t/><t/>parkingBrakes.turnOff();<br>
+				<n>29.</n><t/><t/><t/><t/>}<br>
+				<n>30.</n><t/><t/><t/>});<br>
+				<n>31.</n><t/><br>
+				<n>32.</n><t/><t/><t/>engine.engineOnActions = engineOnListeners;<br>
+				<n>33.</n><t/><t/><t/>engine.engineOffActions = engineOffListeners;<br>
+				<n>34.</n><t/><t/>}<br>
+				<n>35.</n><t/><br>
+				<n>36.</n><t/><t/><k1>public void</k1> startEngine() {<br>
+				<n>37.</n><t/><t/><t/>engine.turnOn();<br>
+				<n>38.</n><t/><t/>}<br>
+				<n>39.</n><t/><br>
+				<n>40.</n><t/><t/><k1>public void</k1> stopEngine() {<br>
+				<n>41.</n><t/><t/><t/>engine.turnOff();<br>
+				<n>42.</n><t/><t/>}<br>
+				<n>43.</n><t/>}<br>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton2" type="button" class="btn btn-link" data-toggle="collapse" data-target="#python2">
+			<b><u>Python pavyzdys Nr. 2</u></b> <img id="pythonToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python2" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">	
+			<b>Klasė Event:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Event</k2>(object):<br>
+				<n>2. </n><t/><t/><k1>def</k1> __init__(<k2>self</k2>):<br>
+				<n>3. </n><t/><t/><t/><k2>self</k2>.handlers = []<br>
+				<n>4. </n><t/><br>
+				<n>5. </n><t/><t/><k1>def</k1> add(<k2>self</k2>, handler):<br>
+				<n>6. </n><t/><t/><t/><k2>self</k2>.handlers.append(handler)<br>
+				<n>7. </n><t/><t/><t/><k1>return</k1> <k2>self</k2><br>
+				<n>8. </n><br>
+				<n>9. </n><t/><t/><k1>def</k1> remove(<k2>self</k2>, handler):<br>
+				<n>10.</n><t/><t/><t/><k2>self</k2>.handlers.remove(handler)<br>
+				<n>11.</n><t/><t/><t/><k1>return</k1> <k2>self</k2><br>
+				<n>12.</n><t/><t/><br>
+				<n>13.</n><t/><t/><k1>def</k1> fire(<k2>self</k2>, sender, earg=<k1>None</k1>):<br>
+				<n>14.</n><t/><t/><t/><k1>for</k1> handler <k1>in</k1> <k2>self</k2>.handlers:<br>
+				<n>15.</n><t/><t/><t/><t/>handler(sender, earg)<br>
+				<n>16.</n><t/><t/><br>
+				<n>17.</n><t/><t/>__iadd__ = add<br>
+				<n>18.</n><t/><t/>__isub__ = remove<br>
+				<n>19.</n><t/><t/>__call__ = fire<br>
+			</div>
+			<b>Klasė Engine:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Engine</k2>:<br>
+				<n>2. </n><t/><t/>_currentPower = 0<br>
+				<n>3. </n><t/><t/>_is_on = <k1>False</k1><br>
+				<n>4. </n><t/><t/>engine_on_events = Event()<br>
+				<n>5. </n><t/><t/>engine_off_events = Event()<br>
+				<n>6. </n><t/><br>
+				<n>7. </n><t/><t/><k1>def</k1> turn_on(<k2>self</k2>):<br>
+				<n>8. </n><t/><t/><t/><k2>self</k2>._is_on = <k1>True</k1><br>
+				<n>9. </n><t/><t/><t/><k1>if</k1> <k2>self</k2>.engine_on_events <k1>is not None</k1>:<br>
+				<n>10.</n><t/><t/><t/><t/><k2>self</k2>.engine_on_events(<k2>self</k2>)<br>
+				<n>11.</n><br>
+				<n>12.</n><t/><t/><k1>def</k1> turn_off(<k2>self</k2>):<br>
+				<n>13.</n><t/><t/><t/><k2>self</k2>._is_on = <k1>False</k1><br>
+				<n>14.</n><t/><t/><t/><k1>if</k1> <k2>self</k2>.engine_off_events <k1>is not None</k1>:<br>
+				<n>15.</n><t/><t/><t/><t/><k2>self</k2>.engine_off_events(<k2>self</k2>)<br>
+				<n>16.</n><br>
+				<n>17.</n><t/><t/>..................<br>
+			</div>
+			<b>Klasė FrontLights:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>FrontLights</k2>:<br>
+				<n>2. </n><t/><t/>_is_on = <k1>False</k1><br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><t/><k1>def</k1> turn_on(<k2>self</k2>):<br>
+				<n>5. </n><t/><t/><t/><k2>self</k2>._is_on = <k1>True</k1><br>
+				<n>6. </n><br>
+				<n>7. </n><t/><t/><k1>def</k1> turn_off(<k2>self</k2>):<br>
+				<n>8. </n><t/><t/><t/><k2>self</k2>._is_on = <k1>False</k1><br>
+			</div>
+			<b>Klasė ParkingBrakes:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>ParkingBrakes</k2>:<br>
+				<n>2. </n><t/><t/>_is_on = <k1>True</k1><br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><t/><k1>def</k1> turn_on(<k2>self</k2>):<br>
+				<n>5. </n><t/><t/><t/><k2>self</k2>._is_on = <k1>True</k1><br>
+				<n>6. </n><br>
+				<n>7. </n><t/><t/><k1>def</k1> turn_off(<k2>self</k2>):<br>
+				<n>8. </n><t/><t/><t/><k2>self</k2>._is_on = <k1>False</k1><br>
+			</div>
+			<b>Klasė Car:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><k1>class</k1> <k2>Car</k2>:<br>
+				<n>2. </n><t/><t/>_engine = <k2>Engine</k2>()<br>
+				<n>3. </n><t/><t/>_parking_brakes = <k2>ParkingBrakes</k2>()<br>
+				<n>4. </n><t/><t/>_front_lights = <k2>FrontLights</k2>()<br>
+				<n>5. </n><br>
+				<n>6. </n><t/><t/><k1>def</k1> __init__(<k2>self</k2>):<br>
+				<n>7. </n><t/><t/><t/><k2>self</k2>.engine.engine_on_events += <k2>self</k2>._turn_lights_on<br>
+				<n>8. </n><t/><t/><t/><k2>self</k2>.engine.engine_off_events += <k2>self</k2>._turn_lights_off<br>
+				<n>9. </n><t/><t/><t/><k2>self</k2>.engine.engine_off_events += <k2>self</k2>._turn_brakes_on<br>
+				<n>10.</n><t/><br>
+				<n>11.</n><t/><t/><k1>def</k1> start_engine(<k2>self</k2>):<br>
+				<n>12.</n><t/><t/><t/><k2>self</k2>._engine.turn_on()<br>
+				<n>13.</n><t/><br>
+				<n>14.</n><t/><t/><k1>def</k1> stop_engine(<k2>self</k2>):<br>
+				<n>15.</n><t/><t/><t/><k2>self</k2>._engine.turn_off()<br>
+				<n>16.</n><t/><br>
+				<n>17.</n><t/><t/><k1>def</k1> _turn_lights_on(<k2>self</k2>, sender, earg):<br>
+				<n>18.</n><t/><t/><t/><k2>self</k2>._front_lights.turn_on()<br>
+				<n>19.</n><t/><br>
+				<n>20.</n><t/><t/><k1>def</k1> _turn_lights_off(<k2>self</k2>, sender, earg):<br>
+				<n>21.</n><t/><t/><t/><k2>self</k2>._front_lights.turn_off()<br>
+				<n>22.</n><t/><br>
+				<n>23.</n><t/><t/><k1>def</k1> _turn_brakes_on(<k2>self</k2>, sender, earg):<br>
+				<n>24.</n><t/><t/><t/><k2>self</k2>._parking_brakes.turn_on()<br>
+			</div>
+		</div>
+	</div>
+		
+	<p>
+		Antrąjame pavyzdyje matome pateiktą sprendimą, paremtą įvykiais. Įvykiais grįstas sprendimas, leidžia inicijuoti pagrindinį veiksmą, o pastarasis, gali inicijuoti kitus ir t.t. Įvykiais grįstas sprendimas turi dar vieną privalumą: nereikia nuolatos tikrinti ar jau kažkas įvyko ar dar ne. Įsivaizduokite, jei kuriant programą su grafine naudotojo sąaja reikėtų pastoviai tikrinti ar mygtukas buvo paspaustas, ar ne, o jei sąsajoje būtų 10 mygtukų? Be įvykių, būtų labai painu grafines naudotojo sąsajas programuoti. Norint pridėti veiksmą prie įvykio užtenka pridėti tą veiksmą į tam tikram įvykiui priskirtų veiksmų sąrašą, o norint nutraukti tam tikro veiksmo vykdymą, tereikia pašalinti iš sąrašo. 
+	</p>
+	
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie įvykius:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/events/" class="list-group-item list-group-item-action"><u><b>C# įvykiai</b> (nuoroda į C# techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/uiswing/events/actionlistener.html" class="list-group-item list-group-item-action"><u><b>Java įvykiai</b> (nuoroda į Java techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://emptypage.jp/notes/pyevent.en.html" class="list-group-item list-group-item-action"><u><b>Python įvykiai</b> (nuoroda į EmptyPage svetainę)</u></a>
+		</div>
+	</div>
+	<hr/>
+	
+</div>
