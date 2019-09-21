@@ -21,10 +21,6 @@
 		};
 		
 		window.onload = function(e){
-			var moodle = $.urlParam('moodle');
-			if (moodle !== 1) {
-				window.location.replace("https://vma-test.viko.lt/");
-			}
 
 			var page = $.urlParam('page');
 			if (page === null) {
