@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>	
+	
+	<script>
+
+		$.urlParam = function(name){
+			var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+			if (results==null){
+			   return null;
+			}
+			else{
+			   return decodeURI(results[1]) || 0;
+			}
+		};
+		
+		window.onload = function(e){
+
+			var page = $.urlParam('page');
+			if (page === null) {
+				page=1;
+			}
+			if (page == 1) {
+				$("#main").load("intro.html");
+				$("#title").html("Introduction");
+			} else if (page == 2) {
+				$("#main").load("1.html");
+				$("#title").html("1. Object-oriented programming principles");
+			} else if (page == 3) {
+				$("#main").load("2.html");
+				$("#title").html("2. Class and object definitions");
+			} else if (page == 4) {
+				$("#main").load("3.html");
+				$("#title").html("3. Structured programming elements");
+			} else if (page == 5) {
+				$("#main").load("4.html");
+				$("#title").html("4. Encapsulation");
+			} else if (page == 6) {
+				$("#main").load("5.html");
+				$("#title").html("5. Inheritance");
+			} else if (page == 7) {
+				$("#main").load("6.html");
+				$("#title").html("6. Polymorphism");
+			} else if (page == 8) {
+				$("#main").load("7.html");
+				$("#title").html("7. Abstract class");
+			} else if (page == 9) {
+				$("#main").load("8.html");
+				$("#title").html("8. Interface");
+			} else if (page == 10) {
+				$("#main").load("9.html");
+				$("#title").html("9. Exceptions handling");
+			} else if (page == 11) {
+				$("#main").load("10.html");
+				$("#title").html("10. Objects  array, list");
+			} else if (page == 12) {
+				$("#main").load("11.html");
+				$("#title").html("11. Delegates");
+			} else if (page == 13) {
+				$("#main").load("12.html");
+				$("#title").html("12. Events");
+			} else if (page == 14) {
+				$("#main").load("13.html");
+				$("#title").html("13. Object life cycle");
+			} else if (page == 15) {
+				$("#main").load("14.html");
+				$("#title").html("14. Object serialization");
+			} else if (page == 16) {
+				$("#main").load("15.html");
+				$("#title").html("15. File system objects management");
+			} else if (page == 17) {
+				$("#main").load("16.html");
+				$("#title").html("16. Database objects management");
+			} else if (page == 18) {
+				$("#main").load("17.html");
+				$("#title").html("17. SOLID principles");
+			} else if (page == 19) {
+				$("#main").load("18.html");
+				$("#title").html("18. Aspekct-oriented programming fundamentals");
+			}
+		};
+		
+		
+		
+		$(document).ready(function() {
+		
+			$('body').on('click', '#csharpButton1', function () {
+				if ($("div #csharp1").hasClass("show")) {
+						$("#csharpToggle1").attr("src", "svg/si-glyph-arrow-down.svg");
+					} else {
+						$("#csharpToggle1").attr("src", "svg/si-glyph-arrow-up.svg");
+					}
+			});
+		
+			$('body').on('click', '#csharpButton2', function () {
+				if ($("div #csharp2").hasClass("show")) {
+					$("#csharpToggle2").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#csharpToggle2").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#csharpButton3', function () {
+				if ($("div #csharp3").hasClass("show")) {
+					$("#csharpToggle3").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#csharpToggle3").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#csharpButton4', function () {
+				if ($("div #csharp4").hasClass("show")) {
+					$("#csharpToggle4").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#csharpToggle4").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#csharpButton5', function () {
+				if ($("div #csharp5").hasClass("show")) {
+					$("#csharpToggle5").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#csharpToggle5").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#csharpButton6', function () {
+				if ($("div #csharp6").hasClass("show")) {
+					$("#csharpToggle6").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#csharpToggle6").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#javaButton1', function () {
+				if ($("div #java1").hasClass("show")) {
+					$("#javaToggle1").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#javaToggle1").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#javaButton2', function () {
+				if ($("div #java2").hasClass("show")) {
+					$("#javaToggle2").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#javaToggle2").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#javaButton3', function () {
+				if ($("div #java3").hasClass("show")) {
+					$("#javaToggle3").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#javaToggle3").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#javaButton4', function () {
+				if ($("div #java4").hasClass("show")) {
+					$("#javaToggle4").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#javaToggle4").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#javaButton5', function () {
+				if ($("div #java5").hasClass("show")) {
+					$("#javaToggle5").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#javaToggle5").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#javaButton6', function () {
+				if ($("div #java6").hasClass("show")) {
+					$("#javaToggle6").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#javaToggle6").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#pythonButton1', function () {
+				if ($("div #python1").hasClass("show")) {
+					$("#pythonToggle1").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#pythonToggle1").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#pythonButton2', function () {
+				if ($("div #python2").hasClass("show")) {
+					$("#pythonToggle2").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#pythonToggle2").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#pythonButton3', function () {
+				if ($("div #python3").hasClass("show")) {
+					$("#pythonToggle3").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#pythonToggle3").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#pythonButton4', function () {
+				if ($("div #python4").hasClass("show")) {
+					$("#pythonToggle4").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#pythonToggle4").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#pythonButton5', function () {
+				if ($("div #python5").hasClass("show")) {
+					$("#pythonToggle5").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#pythonToggle5").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+			
+			$('body').on('click', '#pythonButton6', function () {
+				if ($("div #python6").hasClass("show")) {
+					$("#pythonToggle6").attr("src", "svg/si-glyph-arrow-down.svg");
+				} else {
+					$("#pythonToggle6").attr("src", "svg/si-glyph-arrow-up.svg");
+				}
+			});
+		});
+		
+	</script>
+</head>
+
+<body>
+    <div class="container-fluid" style="height:30px; background-color: #0b3948;">
+        <a href="https://vma-test.viko.lt/course/view.php?id=455" style="color: #d9dbf1;"><u>Back to Moodle Environment</u></a>
+    </div>
+	<div class="container-fluid" style="height: 50px; background-color:#0b3948; text-align:center; color: #d9dbf1;">
+        <h4 id="title">Įvadas</h4>
+    </div>
+	
+	<div class="row">
+		<div class="col-xs-4 col-sm-3 col-lg-2" style="vertical-align:top; background-color: #0b3948; ">		
+			<div class="list-group" >
+				<a id="intro" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=1" class="list-group-item list-group-item-action">Introduction</a>
+				<a id="principles" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=2" class="list-group-item list-group-item-action">1. Object-oriented programming principles</a>
+				<a id="definition" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=3" class="list-group-item list-group-item-action">2. Class and object definitions</a>
+				<a id="elements" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=4" class="list-group-item list-group-item-action">3. Structured programming elements</a>
+				<a id="encapsulation" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=5" class="list-group-item list-group-item-action">4. Encapsulation</a>
+				<a id="inheritance" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=6" class="list-group-item list-group-item-action disabled">5. Inheritance</a>
+				<a id="polymorphism" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=7" class="list-group-item list-group-item-action disabled">6. Polymorphism</a>
+				<a id="abstract" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=8" class="list-group-item list-group-item-action disabled">7. Abstract class</a>
+				<a id="interfaces" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=9" class="list-group-item list-group-item-action disabled">8. Interface</a>
+				<a id="exceptions" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=10" class="list-group-item list-group-item-action disabled">9. Exceptions handling</a>
+				<a id="collections" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=11" class="list-group-item list-group-item-action disabled">10. Objects array, list</a>
+				<a id="delegates" style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=12" class="list-group-item list-group-item-action disabled">11. Delegates</a>
+				<a style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=13" class="list-group-item list-group-item-action disabled">12. Events</a>
+				<a style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=14" class="list-group-item list-group-item-action disabled">13. Object life cycle</a>
+				<a style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=15" class="list-group-item list-group-item-action disabled">14. Object serialization</a>
+				<a style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=16" class="list-group-item list-group-item-action disabled">15. Filesystem objects management</a>
+				<a style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=17" class="list-group-item list-group-item-action disabled">16. Database objects management</a>
+				<a style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=18" class="list-group-item list-group-item-action disabled">17. SOLID principles</a>
+				<a style="background-color: #0b3948; color: #d9dbf1; padding:10px;" href="oop.html?page=19" class="list-group-item list-group-item-action disabled">18. Aspect-oriented programming fundamentals</a>
+			</div>		
+		</div>
+	
+		<div id="main" class="col-xs-8 col-sm-9 col-lg-10" style="background-color: #d9dbf1;">
+				
+		</div>
+	</div>
+</body>
+
+</html>

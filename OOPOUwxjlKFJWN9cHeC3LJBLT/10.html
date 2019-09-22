@@ -1,0 +1,307 @@
+<div class="container-fluid">
+	<p>
+		Objektų rinkinius galima skirstyti į dvi kategorijas: statiniai ir dinaminiai rinkiniai. Statiniai rinkiniai pasižymi tuo, kad jų dydis yra fiksuotas ir vėliau programos eigoje (angl. <i>runtime</i>), jo dydžio keisti negalima. Dinaminiai rinkiniai pasižymi tuo, kad jų dydį galime koreguoti programos eigoje. Tipiškas statinių rinkinių atvejis - masyvai. Panagrinėkime pavyzdį.
+	</p>
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#csharp1">
+			<b><u>C# pavyzdys Nr. 1</u></b> <img id="csharpToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Masyvo inicializavimas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm>// Masyvas inicializuojamas užpildant duomenimis</comm><br>
+				<n>2. </n><t/><k1>int</k1>[] integersArray = <k1>new int</k1>[] { 5, 6, 7, 2, 6 };<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><comm>// Masyvas inicializuojamas, o po to užpildomas</comm><br>
+				<n>5. </n><t/><k1>int</k1>[] integersArray = <k1>new int</k1>[5];<br>
+				<n>6. </n><t/>integersArray[0] = 5;<br>
+				<n>7. </n><t/>integersArray[1] = 6;<br>
+				<n>8. </n><t/>integersArray[2] = 7;<br>
+				<n>9. </n><t/>integersArray[3] = 2;<br>
+				<n>10.</n><t/>integersArray[4] = 6;<br>
+				<n>11.</n><br>
+				<n>12.</n><t/><comm>// Objektų masyvo inicializavimas</comm><br>
+				<n>13.</n><t/><k2>Circle</k2>[] circlesArray = <k1>new</k1> <k2>Circle</k2>[5];<br>
+				<n>14.</n><t/>circlesArray[0] = <k1>new</k1> <k2>Circle</k2>(8.5);<br>
+				<n>15.</n><t/>circlesArray[1] = <k1>new</k1> <k2>Circle</k2>(2.4);<br>
+				<n>16.</n><t/>circlesArray[2] = <k1>new</k1> <k2>Circle</k2>(5.1);<br>
+				<n>17.</n><t/>circlesArray[3] = <k1>new</k1> <k2>Circle</k2>(6.4);<br>
+				<n>18.</n><t/>circlesArray[4] = <k1>new</k1> <k2>Circle</k2>(3.7);<br>
+			</div>
+			<b>Masyvo valdymas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm>// Masyvo elementų kiekis</comm><br>
+				<n>2. </n><t/><k1>int</k1> n = integersArray.Length;<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><comm>// Iteravimas per masyvo elementus for ciklu</comm><br>
+				<n>5. </n><t/><k1>for</k1> (<k1>int</k1> i = 0; i &lt; circlesArray.Length; i++)<br>
+				<n>6. </n><t/>{<br>
+				<n>7. </n><t/><t/>WriteLine(<quot>$&quot;Plotas = </quot>{circlesArray[i].GetAreaSize()}<quot>&quot;</quot>);<br>
+				<n>8. </n><t/>}<br>
+				<n>9. </n><br>
+				<n>10.</n><t/><comm>// Iteravimas per masyvo elementus foreach ciklu</comm><br>
+				<n>11.</n><t/><k1>foreach</k1> (<k2>Circle</k2> circle <k1>in</k1> circlesArray)<br>
+				<n>12.</n><t/>{<br>
+				<n>13.</n><t/><t/>WriteLine(<quot>$&quot;Plotas = </quot>{circle.GetAreaSize()}<quot>&quot;</quot>);<br>
+				<n>14.</n><t/>}<br>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#java1">
+			<b><u>Java pavyzdys Nr. 1</u></b> <img id="javaToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Masyvo inicializavimas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm>// Masyvas inicializuojamas užpildant duomenimis</comm><br>
+				<n>2. </n><t/><k1>int</k1>[] integersArray = <k1>new int</k1>[] { 5, 6, 7, 2, 6 };<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><comm>// Masyvas inicializuojamas, o po to užpildomas</comm><br>
+				<n>5. </n><t/><k1>int</k1>[] integersArray = <k1>new int</k1>[5];<br>
+				<n>6. </n><t/>integersArray[0] = 5;<br>
+				<n>7. </n><t/>integersArray[1] = 6;<br>
+				<n>8. </n><t/>integersArray[2] = 7;<br>
+				<n>9. </n><t/>integersArray[3] = 2;<br>
+				<n>10.</n><t/>integersArray[4] = 6;<br>
+				<n>11.</n><br>
+				<n>12.</n><t/><comm>// Objektų masyvo inicializavimas</comm><br>
+				<n>13.</n><t/><k2>Circle</k2>[] circlesArray = <k1>new</k1> <k2>Circle</k2>[5];<br>
+				<n>14.</n><t/>circlesArray[0] = <k1>new</k1> <k2>Circle</k2>(8.5);<br>
+				<n>15.</n><t/>circlesArray[1] = <k1>new</k1> <k2>Circle</k2>(2.4);<br>
+				<n>16.</n><t/>circlesArray[2] = <k1>new</k1> <k2>Circle</k2>(5.1);<br>
+				<n>17.</n><t/>circlesArray[3] = <k1>new</k1> <k2>Circle</k2>(6.4);<br>
+				<n>18.</n><t/>circlesArray[4] = <k1>new</k1> <k2>Circle</k2>(3.7);<br>
+			</div>
+			<b>Masyvo valdymas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm>// Masyvo elementų kiekis</comm><br>
+				<n>2. </n><t/><k1>int</k1> n = integersArray.length;<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><comm>// Iteravimas per masyvo elementus for ciklu (1-as variantas)</comm><br>
+				<n>5. </n><t/><k1>for</k1> (<k1>int</k1> i = 0; i &lt; circlesArray.length; i++) {<br>
+				<n>6. </n><t/><t/>format(<quot>&quot;Plotas = %f&quot;</quot>, circlesArray[i].getAreaSize());<br>
+				<n>7. </n><t/>}<br>
+				<n>8. </n><br>
+				<n>9. </n><t/><comm>// Iteravimas per masyvo elementus for ciklu (2-as variantas)</comm><br>
+				<n>10.</n><t/><k1>for</k1> (<k2>Circle</k2> circle: circlesArray) {<br>
+				<n>11.</n><t/><t/>format(<quot>&quot;Plotas = %f&quot;</quot>, circle.getAreaSize());<br>
+				<n>12.</n><t/>}<br>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#python1">
+			<b><u>Python pavyzdys Nr. 1</u></b> <img id="pythonToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Masyvo inicializavimas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm># Masyvas inicializuojamas užpildant duomenimis</comm><br>
+				<n>2. </n><t/>integers_array = [ 5, 6, 7, 2, 6 ]<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><comm># Masyvas inicializuojamas, o po to užpildomas</comm><br>
+				<n>5. </n><t/>integers_array = [<k1>None</k1>] * 5<br>
+				<n>6. </n><t/>integers_array[0] = 5<br>
+				<n>7. </n><t/>integers_array[1] = 6<br>
+				<n>8. </n><t/>integers_array[2] = 7<br>
+				<n>9. </n><t/>integers_array[3] = 2<br>
+				<n>10.</n><t/>integers_array[4] = 6<br>
+				<n>11.</n><br>
+				<n>12.</n><t/><comm># Objektų masyvo inicializavimas</comm><br>
+				<n>13.</n><t/>circles_array = [<k1>None</k1>] * 5<br>
+				<n>14.</n><t/>circles_array[0] = <k2>Circle</k2>(8.5)<br>
+				<n>15.</n><t/>circles_array[1] = <k2>Circle</k2>(2.4)<br>
+				<n>16.</n><t/>circles_array[2] = <k2>Circle</k2>(5.1)<br>
+				<n>17.</n><t/>circles_array[3] = <k2>Circle</k2>(6.4)<br>
+				<n>18.</n><t/>circles_array[4] = <k2>Circle</k2>(3.7)<br>
+			</div>
+			<b>Masyvo valdymas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm># Masyvo elementų kiekis</comm><br>
+				<n>2. </n><t/>n = len(integers_array)<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><comm># Iteravimas per masyvo elementus for ciklu (1-as variantas)</comm><br>
+				<n>5. </n><t/><k1>for</k1> i <k1>in</k1> range(0, len(circles_array)):<br>
+				<n>6. </n><t/><t/>print(<quot>&quot;Plotas =&quot;</quot>, circles_array[i].get_area_size())<br>
+				<n>7. </n><br>
+				<n>8. </n><t/><comm># Iteravimas per masyvo elementus for ciklu (2-as variantas)</comm><br>
+				<n>9. </n><t/><k1>for</k1> circle <k1>in</k1> circles_array:<br>
+				<n>10.</n><t/><t/>print(<quot>&quot;Plotas =&quot;</quot>, circle.get_area_size())<br>
+			</div>
+		</div>
+	</div>
+	
+	<p>
+		Dinaminiai rinkiniai patogūs tuo, kad galima valdyti jų dydį, t.y. esant reikalui padidinti, pridedant naujų elementų arba sumažinti, pašalinant elementus. Panagrinėkime pavyzdį.
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton2" type="button" class="btn btn-link" data-toggle="collapse" data-target="#csharp2">
+			<b><u>C# pavyzdys Nr. 2</u></b> <img id="csharpToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp2" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Sąrašo inicializavimas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm>// Sąrašas inicializuojamas užpildant duomenimis</comm><br>
+				<n>2. </n><t/><k2>List</k2>&lt;<k1>int</k1>&gt; integersList = <k1>new</k1> <k2>List</k2>&lt;<k1>int</k1>&gt;() { 5, 6, 7, 2, 6 };<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><comm>// Sąrašas inicializuojamas, o po to užpildomas</comm><br>
+				<n>5. </n><t/><k2>List</k2>&lt;<k1>int</k1>&gt; integersList = <k1>new</k1> <k2>List</k2>&lt;<k1>int</k1>&gt;();<br>
+				<n>6. </n><t/>integersList.Add(5);<br>
+				<n>7. </n><t/>integersList.Add(6);<br>
+				<n>8. </n><t/>integersList.Add(7);<br>
+				<n>9. </n><t/>integersList.Add(2);<br>
+				<n>10.</n><t/>integersList.Add(6);<br>
+				<n>11.</n><br>
+				<n>12.</n><t/><comm>// Objektų sąrašo inicializavimas ir pildymas</comm><br>
+				<n>13.</n><t/><k2>List</k2>&lt;<k2>Circle</k2>&gt; circlesList = <k1>new</k1> <k2>List</k2>&lt;<k2>Circle</k2>&gt;();<br>
+				<n>14.</n><t/>circlesList.Add(<k1>new</k1> <k2>Circle</k2>(8.5));<br>
+				<n>15.</n><t/>circlesList.Add(<k1>new</k1> <k2>Circle</k2>(2.4));<br>
+				<n>16.</n><t/>circlesList.Add(<k1>new</k1> <k2>Circle</k2>(5.1));<br>
+				<n>17.</n><t/>circlesList.Add(<k1>new</k1> <k2>Circle</k2>(6.4));<br>
+				<n>18.</n><t/>circlesList.Add(<k1>new</k1> <k2>Circle</k2>(3.7));<br>
+			</div>
+			<b>Sąrašo valdymas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm>// Sąrašo elementų kiekis</comm><br>
+				<n>2. </n><t/><k1>int</k1> n = integersList.Count;<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><comm>// Iteravimas per sąrašo elementus for ciklu</comm><br>
+				<n>5. </n><t/><k1>for</k1> (<k1>int</k1> i = 0; i &lt; circlesList.Count; i++)<br>
+				<n>6. </n><t/>{<br>
+				<n>7. </n><t/><t/>WriteLine(<quot>$&quot;Plotas = </quot>{circlesList[i].GetAreaSize()}<quot>&quot;</quot>);<br>
+				<n>8. </n><t/>}<br>
+				<n>9. </n><br>
+				<n>10.</n><t/><comm>// Iteravimas per sąrašo elementus foreach ciklu</comm><br>
+				<n>11.</n><t/><k1>foreach</k1> (<k2>Circle</k2> circle <k1>in</k1> circlesList)<br>
+				<n>12.</n><t/>{<br>
+				<n>13.</n><t/><t/>WriteLine(<quot>$&quot;Plotas = </quot>{circle.GetAreaSize()}<quot>&quot;</quot>);<br>
+				<n>14.</n><t/>}<br>
+				<n>15.</n><br>
+				<n>16.</n><t/><comm>// Sąrašo išvalymas</comm><br>
+				<n>17.</n><t/>circlesList.Clear();<br>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton2" type="button" class="btn btn-link" data-toggle="collapse" data-target="#java2">
+			<b><u>Java pavyzdys Nr. 2</u></b> <img id="javaToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java2" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Sąrašo inicializavimas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm>// Papildomų bibliotekų importavimas</comm><br>
+				<n>2. </n><t/><k1>import</k1> java.util.ArrayList;<br>
+				<n>3. </n><t/><k1>import</k1> java.util.List;<br>
+				<n>4. </n><br>
+				<n>5. </n><t/><comm>// Sąrašas inicializuojamas, o po to užpildomas</comm><br>
+				<n>6. </n><t/><k2>List</k2>&lt;<k2>Integer</k2>&gt; integersList = <k1>new</k1> <k2>ArrayList</k2>&lt;<k2>Integer</k2>&gt;();<br>
+				<n>7. </n><t/>integersList.add(5);<br>
+				<n>8. </n><t/>integersList.add(6);<br>
+				<n>9. </n><t/>integersList.add(7);<br>
+				<n>10.</n><t/>integersList.add(2);<br>
+				<n>11.</n><t/>integersList.add(6);<br>
+				<n>12.</n><br>
+				<n>13.</n><t/><comm>// Objektų sąrašo inicializavimas ir pildymas</comm><br>
+				<n>14.</n><t/><k2>List</k2>&lt;<k2>Circle</k2>&gt; integersList = <k1>new</k1> <k2>ArrayList</k2>&lt;<k2>Circle</k2>&gt;();<br>
+				<n>15.</n><t/>circlesList.add(<k1>new</k1> <k2>Circle</k2>(8.5));<br>
+				<n>16.</n><t/>circlesList.add(<k1>new</k1> <k2>Circle</k2>(2.4));<br>
+				<n>17.</n><t/>circlesList.add(<k1>new</k1> <k2>Circle</k2>(5.1));<br>
+				<n>18.</n><t/>circlesList.add(<k1>new</k1> <k2>Circle</k2>(6.4));<br>
+				<n>19.</n><t/>circlesList.add(<k1>new</k1> <k2>Circle</k2>(3.7));<br>
+			</div>
+			<b>Sąrašo valdymas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm>// Sąrašo elementų kiekis</comm><br>
+				<n>2. </n><t/><k1>int</k1> n = integersList.size();<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><comm>// Iteravimas per sąrašo elementus for ciklu (1-as variantas)</comm><br>
+				<n>5. </n><t/><k1>for</k1> (<k1>int</k1> i = 0; i &lt; circlesList.size(); i++) {<br>
+				<n>6. </n><t/><t/>format(<quot>&quot;Plotas = %f&quot;</quot>, circlesList[i].getAreaSize());<br>
+				<n>8. </n><t/>}<br>
+				<n>9. </n><br>
+				<n>10.</n><t/><comm>// Iteravimas per sąrašo elementus for ciklu (2-as variantas)</comm><br>
+				<n>11.</n><t/><k1>for</k1> (<k2>Circle</k2> circle: circlesList) {<br>
+				<n>13.</n><t/><t/>format(<quot>&quot;Plotas = %f&quot;</quot>, circle.getAreaSize());<br>
+				<n>14.</n><t/>}<br>
+				<n>15.</n><br>
+				<n>16.</n><t/><comm>// Sąrašo išvalymas</comm><br>
+				<n>17.</n><t/>circlesList.clear();<br>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton2" type="button" class="btn btn-link" data-toggle="collapse" data-target="#python2">
+			<b><u>Python pavyzdys Nr. 2</u></b> <img id="pythonToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python2" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<b>Sąrašo inicializavimas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm># Sąrašo inicializavimas užpildant elementais</comm><br>
+				<n>2. </n><t/>integers_list = list([5, 6, 7, 6, 2])<br>
+				<n>3. </n><br>
+				<n>4. </n><t/><comm># Sąrašo inicializavimas</comm><br>
+				<n>5. </n><t/>integers_list = list()<br>
+				<n>6. </n><t/><br>
+				<n>7. </n><t/><comm># Sąrašo pildymas</comm><br>
+				<n>8. </n><t/>integers_list.append(5)<br>
+				<n>9. </n><t/>integers_list.append(6)<br>
+				<n>10.</n><t/>integers_list.append(7)<br>
+				<n>11.</n><t/>integers_list.append(2)<br>
+				<n>12.</n><t/>integers_list.append(6)<br>
+				<n>13.</n><br>
+				<n>14.</n><t/><comm># Objektų sąrašo inicializavimas ir pildymas</comm><br>
+				<n>15.</n><t/>circles_list = list()<br>
+				<n>16.</n><t/>circles_list.append(<k2>Circle</k2>(8.5))<br>
+				<n>17.</n><t/>circles_list.append(<k2>Circle</k2>(2.4))<br>
+				<n>18.</n><t/>circles_list.append(<k2>Circle</k2>(5.1))<br>
+				<n>19.</n><t/>circles_list.append(<k2>Circle</k2>(6.4))<br>
+				<n>20.</n><t/>circles_list.append(<k2>Circle</k2>(3.7))<br>
+			</div>
+			<b>Sąrašo valdymas:</b>
+			<div class="code" style="vertical-align:top; text-align: left;">
+				<n>1. </n><t/><comm># Sąrašo elementų kiekis</comm><br>
+				<n>2. </n><t/>n = len(integers_list)<br>
+				<n>3. </n><t/><br>
+				<n>4. </n><t/><comm># Iteravimas per sąrašo elementus for ciklu (1-as variantas)</comm><br>
+				<n>5. </n><t/><k1>for</k1> i <k1>in</k1> range(0, len(circles_list)):<br>
+				<n>6. </n><t/><t/>print(<quot>&quot;Plotas =&quot;</quot>, circles_list[i].get_area_size())<br>
+				<n>7. </n><br>
+				<n>8. </n><t/><comm># Iteravimas per sąrašo elementus for ciklu (2-as variantas)</comm><br>
+				<n>9. </n><t/><k1>for</k1> circle <k1>in</k1> circles_list:<br>
+				<n>10.</n><t/><t/>print(<quot>&quot;Plotas =&quot;</quot>, circle.get_area_size())<br>
+				<n>11.</n><br>
+				<n>12.</n><t/><comm># Sąrašo išvalymas</comm><br>
+				<n>13.</n><t/>circles_list.clear()<br>
+			</div>
+		</div>
+	</div>
+	
+	<p>
+		Antrame pavyzdyje panagrinėjome plačiausiai naudojamą rinkinį <i>List</i>, tačiau yra ir kitokių rinkinių: <i>Dictionary</i>, <i>Set</i> ir t.t. Rinkinio pasirinkimą nulemia sprendžiamo uždavinio ypatumai bei konkretaus rinkinio savybės.
+	</p>
+	
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie objektų rinkinius rasite:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections" class="list-group-item list-group-item-action"><u><b>C# rinkiniai</b> (nuoroda į C# techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://www.tutorialspoint.com/java/java_collections.htm" class="list-group-item list-group-item-action"><u><b>Java rinkiniai</b> (nuoroda į TutorialsPoint svetainę)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.python.org/3.7/library/collections.html" class="list-group-item list-group-item-action"><u><b>Python rinkiniai</b> (nuoroda į Python techninę dokumentaciją)</u></a>
+		</div>
+	</div>
+	<hr/>
+	
+</div>

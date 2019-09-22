@@ -1,0 +1,739 @@
+<p>
+	<div class="list-group" style="padding-left: 20px; padding-right: 20px;">
+		<a style="padding:10px; background-color: #d9dbf1; color: blue;" href="#dataTypes" class="list-group-item list-group-item-action"><u><b>3.1. Data types</b></u></a>
+		<a style="padding:10px; background-color: #d9dbf1; color: blue;" href="#conditionals" class="list-group-item list-group-item-action"><u><b>3.2. Conditionals</b></u></a>
+		<a style="padding:10px; background-color: #d9dbf1; color: blue;" href="#loops" class="list-group-item list-group-item-action"><u><b>3.3. Loops</b></u></a>
+	</div>
+</p>
+
+<div id="dataTypes" class="container-fluid" style="text-align:center;">
+	<h4><b>3.1. Data types</b></h4>
+	<p>
+		All the data processed in software are stored in main memory. The addresses to data are symbolized as variables in source code. Each variable is an instance 
+		of some kind (data type). Data type has its own properties and behaviour (operations) predefined. In some cases, same operation can be implemented 
+		differently in different types, for example, addition operation on two integers will produce the sum of two integers as a result, and will produce 
+		quite different result on two strings.
+	</p>
+	<p>
+		Every programming language has a set of standard data types, that can be used to design and create composite data types: structures or classes.
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/csharp_datatypes.png"><br/>
+		<b>Picture 1. Standard C# (.NET) data types.</b><br/>
+		(Picture source: https://www.c-sharpcorner.com/blogs/data-types-in-csharp1)
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/java_datatypes.png"><br/>
+		<b>Picture 2. Standard Java data types.</b><br/>
+		(Picture source: https://www.tutorialcup.com/java/data-types.htm)
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/python_datatypes.jpg"><br/>
+		<b>Picture 3. Standard Python data types.</b><br/>
+		(Picture source: https://www.linkedin.com/pulse/mutable-vs-immutable-objects-python-megha-mohan/)
+	</p>
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>More information about data types can be found at:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/types-and-variables" class="list-group-item list-group-item-action"><u><b>C# data types</b> (reference to C# technical documentation)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html" class="list-group-item list-group-item-action"><u><b>Java data types</b> (reference to Java technical documentation)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.python.org/3/library/datatypes.html" class="list-group-item list-group-item-action"><u><b>Python data types</b> (reference to Python technical documentation)</u></a>
+		</div>
+	</div>
+	<hr/>
+</div>	
+
+<div id="conditionals" class="container-fluid" style="text-align:center;">
+	<h4 style="padding-top: 30px;"><b>3.2. Conditionals</b></h4>
+	<p>
+		Every software developed to solve real life problem is unimaginable without using any of condition testing operations (conditionals). There are two the 
+		most popular conditional statements, in any programming language, and they are: <i>if</i> and <i>switch</i>.
+	</p>
+	<h5 style="padding-top: 10px;"><b>Conditional statement <i>if</i></b></h5>
+	<p>
+		Testable condition can be one of two: to be <i>true</i> or to be <i>false</i>. If tested condition's result is <i>true</i>, then 
+		all operations listed in <i>then</i> branch are executed , if <i>false</i> - <i>else</i> branch.
+	</p>
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton1" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp1">
+			<u><b>C# Example No. 1</b></u> <img id="csharpToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp1" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(condition)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/><comm>// condition test result is <i>true</i>;</comm><br>
+						<n>4.</n><t/>}<br>
+						<n>5.</n><t/><k1>else</k1><br>
+						<n>6.</n><t/>{<br>
+						<n>7.</n><t/><t/><comm>// condition test result is <i>false</i>;</comm><br>
+						<n>8.</n><t/>}
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(x &lt; y)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/>WriteLine(<quot>$&quot;Number {x} is less than {y}&quot;</quot>);<br>
+						<n>4.</n><t/>}<br>
+						<n>5.</n><t/><k1>else</k1><br>
+						<n>6.</n><t/>{<br>
+						<n>7.</n><t/><t/>WriteLine(<quot>$&quot;Number {x} is not less than {y}&quot;</quot>);<br>
+						<n>8.</n><t/>}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#java1">
+			<u><b>Java Example No. 1</b></u> <img id="javaToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java1" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(condition) {<br>
+						<n>2.</n><t/><t/><comm>// condition test result <i>true</i>;</comm><br>
+						<n>3.</n><t/>} <k1>else</k1> {<br>
+						<n>4.</n><t/><t/><comm>// condition test result is <i>false</i>;</comm><br>
+						<n>5.</n><t/>}
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(x &lt; y) {<br>
+						<n>2.</n><t/><t/>format(<quot>&quot;Number %d is less than %d&quot;</quot>, x, y);<br>
+						<n>3.</n><t/>} <k1>else</k1> {<br>
+						<n>4.</n><t/><t/>format(<quot>&quot;Number %d is not less yhan %d&quot;</quot>, x, y);<br>
+						<n>5.</n><t/>}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton1" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#python1">
+			<u><b>Python Example No. 1</b></u> <img id="pythonToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python1" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> condition:<br>
+						<n>2.</n><t/><t/><comm># condition test result is <i>true</i></comm><br>
+						<n>3.</n><t/><k1>else</k1>:<br>
+						<n>4.</n><t/><t/><comm># condition test result is <i>false</i></comm><br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> x &lt; y:<br>
+						<n>2.</n><t/><t/><k2>print</k2>(<quot>&quot;Number&quot;</quot>,x,<quot>&quot;is less than&quot;</quot>,y)<br>
+						<n>3.</n><t/><k1>else</k1>:<br>
+						<n>4.</n><t/><t/><k2>print</k2>(<quot>&quot;Number&quot;</quot>,x,<quot>&quot;is not less than&quot;</quot>,y)<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<p style="padding-top: 20px;">
+		In case, of having more than two alternatives, we can use <i>if-else-if</i> conditional statement.
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton2" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp2">
+			<u><b>C# Example No. 2</b></u> <img id="csharpToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp2" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(condition1)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/><comm>// condition1 test value <i>true</i>;</comm><br>
+						<n>4. </n><t/>}<br>
+						<n>5. </n><t/><k1>else if </k1>(condition2)<br>
+						<n>6. </n><t/>{<br>
+						<n>7. </n><t/><t/><comm>// condition2 test value <i>true</i>;</comm><br>
+						<n>8. </n><t/>}<br>
+						<n>9. </n><t/><k1>else</k1><br>
+						<n>10.</n><t/>{<br>
+						<n>11.</n><t/><t/><comm>// condition2 test value <i>false</i>;</comm><br>
+						<n>12.</n><t/>}
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(x == y)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/>WriteLine(<quot>&quot;Both numbers are equal&quot;</quot>);<br>
+						<n>4. </n><t/>}<br>
+						<n>5. </n><t/><k1>else if </k1>(x &lt; y)<br>
+						<n>6. </n><t/>{<br>
+						<n>7. </n><t/><t/>WriteLine(<quot>$&quot;Number {x} is less than {y}&quot;</quot>);<br>
+						<n>8. </n><t/>}<br>
+						<n>9. </n><t/><k1>else</k1><br>
+						<n>10.</n><t/>{<br>
+						<n>11.</n><t/><t/>WriteLine(<quot>$&quot;Number {x} is larger than {y}&quot;</quot>);<br>
+						<n>12.</n><t/>}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton2" type="button" class="btn btn-link" data-toggle="collapse" data-target="#java2">
+			<u><b>Java Example No. 2</b></u> <img id="javaToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java2" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(condition1) {<br>
+						<n>2.</n><t/><t/><comm>// condition1 test value <i>true</i>;</comm><br>
+						<n>3.</n><t/>} <k1>else if </k1>(condition2) {<br>
+						<n>4.</n><t/><t/><comm>// condition2 test value <i>true</i>;</comm><br>
+						<n>5.</n><t/>} <k1>else</k1> {<br>
+						<n>6.</n><t/><t/><comm>// condition2 test value <i>false</i>;</comm><br>
+						<n>7.</n><t/>}
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(x == y) {<br>
+						<n>2.</n><t/><t/>println(<quot>&quot;Both numbers are equal&quot;</quot>);<br>
+						<n>3.</n><t/>} <k1>else if </k1>(x &lt; y) {<br>
+						<n>4.</n><t/><t/>format(<quot>&quot;Number %d is less than %d&quot;</quot>, x, y);<br>
+						<n>5.</n><t/>} <k1>else</k1> {<br>
+						<n>6.</n><t/><t/>format(<quot>&quot;Number %d is larger than %d&quot;</quot>, x, y);<br>
+						<n>7.</n><t/>}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton2" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#python2">
+			<u><b>Python Example No. 2</b></u> <img id="pythonToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python2" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> condition1:<br>
+						<n>2.</n><t/><t/><comm># condition1 test value <i>true</i></comm><br>
+						<n>3.</n><t/><k1>elif</k1> condition2:<br>
+						<n>4.</n><t/><t/><comm># condition2 test value <i>true</i></comm><br>
+						<n>5.</n><t/><k1>else</k1>:<br>
+						<n>6.</n><t/><t/><comm># condition2 test value <i>false</i></comm><br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> x == y:<br>
+						<n>2.</n><t/><t/><k2>print</k2>(<quot>&quot;Both numbers are equal&quot;</quot>)<br>
+						<n>3.</n><t/><k1>elif</k1> x &lt; y:<br>
+						<n>4.</n><t/><t/><k2>print</k2>(<quot>&quot;Number&quot;</quot>,x,<quot>&quot;is less than&quot;</quot>,y)<br>
+						<n>5.</n><t/><k1>else</k1>:<br>
+						<n>6.</n><t/><t/><k2>print</k2>(<quot>&quot;Number&quot;</quot>,x,<quot>&quot;is larger than&quot;</quot>,y)<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<p style="padding-top: 20px;">
+		Quite common practice to test several conditions at the same time using the same sentence. In such case, we need to combine testable conditions 
+		to one composite statement. There are two ways to combine conditions:
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item" style="background-color: #d9dbf1; text-align: left;"><b>Conjunction</b>, readable as <i>&#132;and&#148;</i>. 
+				Conjunction result is <i>true</i>, then all testable conditions gives result <i>true</i>. 
+				In C#, Java conjunction symbol is a pair of ampersand symbols, i.e. <i>&amp;&amp;</i>, in Python - keyword <i>and</i>.</li>
+			<li class="list-group-item" style="background-color: #d9dbf1; text-align: left;"><b>Disjunction</b>, readable as <i>&#132;or&#148;</i>. 
+				Disjunction result is <i>true</i>, then at least one of testable conditions gives result <i>true</i>. 
+				In C#, Java disjunction symbol is a pair of vertical bars, i.e. <i>||</i>, in Python - keyword <i>or</i>.</li>
+		</ul>
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton3" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp3">
+			<u><b>C# Example No. 3</b></u> <img id="csharpToggle3" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp3" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Conjunction example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(x &gt; y &amp;&amp; x &gt; z)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/>WriteLine(<quot>$&quot;{x} is larger than {y} and {z}&quot;</quot>);<br>
+						<n>4. </n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Disjunction example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(x &gt; y || x &gt; z)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/>WriteLine(<quot>$&quot;{x} is not the smallest number&quot;</quot>);<br>
+						<n>4. </n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton3" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#java3">
+			<u><b>Java Example No. 3</b></u> <img id="javaToggle3" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java3" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Conjunction example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(x &gt; y &amp;&amp; x &gt; z) {<br>
+						<n>2. </n><t/><t/>println(<quot>&quot;%d is larger than %d and %d&quot;</quot>, x, y, z);<br>
+						<n>3. </n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Disjunction example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(x &gt; y &amp;&amp; x &gt; z) {<br>
+						<n>2. </n><t/><t/>println(<quot>&quot;%d is not the smallest number&quot;</quot>, x);<br>
+						<n>3. </n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton3" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#python3">
+			<u><b>Python Example No. 3</b></u> <img id="pythonToggle3" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python3" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Conjunction example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> x &gt; y <k2>and</k2> x &gt; z:<br>
+						<n>2.</n><t/><t/><k2>print</k2>(<quot>&quot;Number&quot;</quot>,x,<quot>&quot;is larger than&quot;</quot>,y,<quot>&quot;ir&quot;</quot>,z)<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Disjunction example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> x &gt; y <k2>or</k2> x &gt; z:<br>
+						<n>2.</n><t/><t/><k2>print</k2>(<quot>&quot;Number&quot;</quot>,x,<quot>&quot;is not the smallest number&quot;</quot>)<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<p>
+		To test if object is initialized (storing actual data), in C# and Java we need to use <i>if (objectName == null)</i>, in Python - <i>if objectName is None:</i>.
+	</p>
+	<p>
+		To test if object is an instance of some specific class, in C# we need to use <i>if (objectName is ClassName)</i>, in Java - <i>if (objectName instanceof ClassName)</i>, in Python - <i>if objectName is ClassName:</i>.
+	</p>
+	
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>More information about <i>if</i> statement can be found at:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/if-else" class="list-group-item list-group-item-action"><u><b>C# <i>if</i> statement</b> (reference to C# technical documentation)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/if.html" class="list-group-item list-group-item-action"><u><b>Java <i>if</i> statement</b> (reference to Java technical documentation)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.python.org/3/tutorial/controlflow.html#if-statements" class="list-group-item list-group-item-action"><u><b>Python <i>if</i> statement</b> (reference to Python technical documentation)</u></a>
+		</div>
+	</div>
+	<hr/>
+	<h5 style="padding-top: 10px;"><b>Conditional statement <i>switch</i></b></h5>
+	<p>
+		Statement <i>switch</i> is convenient to use if there are limited number of alternatives. 
+		It can be used in menu based systems, checking <i>enum</i> values and etc. You can use <i>switch</i> statement in C# and Java, unfortunately, no such
+		 operator exists in Python.
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton4" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp4">
+			<u><b>C# Example No. 4</b></u> <img id="csharpToggle4" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp4" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>switch </k1>(testedVariable)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/><k1>case</k1> value1:<br>
+						<n>4. </n><t/><t/><t/><comm>// set of statements1;</comm><br>
+						<n>5. </n><t/><t/><t/>break;<br>
+						<n>6. </n><t/><t/><k1>case</k1> value2:<br>
+						<n>7. </n><t/><t/><t/><comm>// set of statements2;</comm><br>
+						<n>8. </n><t/><t/><t/>break;<br>
+						<n>9. </n><t/><t/><k1>default</k1>:<br>
+						<n>10.</n><t/><t/><t/><comm>// set of statements for any other value;</comm><br>
+						<n>11.</n><t/><t/><t/>break;<br>
+						<n>12.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>switch </k1>(choice)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/><k1>case</k1> 1:<br>
+						<n>4. </n><t/><t/><t/>WriteLine(<quot>&quot;You have selected 1st item&quot;</quot>);<br>
+						<n>5. </n><t/><t/><t/>break;<br>
+						<n>6. </n><t/><t/><k1>case</k1> 2:<br>
+						<n>7. </n><t/><t/><t/>WriteLine(<quot>&quot;You have selected 2nd item&quot;</quot>);<br>
+						<n>8. </n><t/><t/><t/>break;<br>
+						<n>9. </n><t/><t/><k1>default</k1>:<br>
+						<n>10.</n><t/><t/><t/>WriteLine(<quot>&quot;You have selected to exit the system&quot;</quot>);<br>
+						<n>11.</n><t/><t/><t/>WriteLine(<quot>&quot;Have a nice day!&quot;</quot>);<br>
+						<n>12.</n><t/><t/><t/>break;<br>
+						<n>13.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton4" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#java4">
+			<u><b>Java Example No. 4</b></u> <img id="javaToggle4" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java4" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>switch </k1>(testedVariable) {<br>
+						<n>2. </n><t/><t/><k1>case</k1> value1:<br>
+						<n>3. </n><t/><t/><t/><comm>// set of statements1;</comm><br>
+						<n>4. </n><t/><t/><t/>break;<br>
+						<n>5. </n><t/><t/><k1>case</k1> value2:<br>
+						<n>6. </n><t/><t/><t/><comm>// set of statements2;</comm><br>
+						<n>7. </n><t/><t/><t/>break;<br>
+						<n>8. </n><t/><t/><k1>default</k1>:<br>
+						<n>9.</n><t/><t/><t/><comm>// set of statements for any other value;</comm><br>
+						<n>10.</n><t/><t/><t/>break;<br>
+						<n>11.</n><t/>}<br>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>switch </k1>(choice) {<br>
+						<n>2. </n><t/><t/><k1>case</k1> 1:<br>
+						<n>3. </n><t/><t/><t/>println(<quot>&quot;You have selected 1st item&quot;</quot>);<br>
+						<n>4. </n><t/><t/><t/>break;<br>
+						<n>5. </n><t/><t/><k1>case</k1> 2:<br>
+						<n>6. </n><t/><t/><t/>println(<quot>&quot;You have selected 2nd item&quot;</quot>);<br>
+						<n>7. </n><t/><t/><t/>break;<br>
+						<n>8. </n><t/><t/><k1>default</k1>:<br>
+						<n>9.</n><t/><t/><t/>println(<quot>&quot;You have selected to exit the system&quot;</quot>);<br>
+						<n>10.</n><t/><t/><t/>println(<quot>&quot;Have a nice day!&quot;</quot>);<br>
+						<n>11.</n><t/><t/><t/>break;<br>
+						<n>12.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>More information about <i>switch</i> statement can be found at:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/switch" class="list-group-item list-group-item-action"><u><b>C# <i>switch</i> statement</b> (reference Microsoft technical documentation)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html" class="list-group-item list-group-item-action"><u><b>Java <i>switch</i> statement</b> (reference to Java technical documentation)</u></a>
+		</div>
+	</div>
+	<hr/>
+</div>
+
+<div id="loops" class="container-fluid" style="text-align:center;">
+	<h4 style="padding-top: 30px;"><b>3.3. Loops</b></h4>
+	<p>
+		Solving real life problems, usualy, we need to implement in source code repetetive operations. In order, to avoid repetetive operations, we can use, 
+		or allow me to say <i>must</i>, use looping statements. Looping statement - operator, automatically repeating operations till predefined condition is valid. 
+		One full round of operations in looping statement is called an iteration. Traditionally, we can find <i>for</i> and <i>while</i> looping statements 
+		in every programming language. The principles are the same, only the syntax may differ in different languages.
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton5" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp5">
+			<u><b>C# Example No. 5</b></u> <img id="csharpToggle5" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for syntax</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1>(expression1; expression2; expression3)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/><comm>// expression1 - loop variable initialization</comm><br>
+						<n>4.</n><t/><t/><comm>// expression2 - looping condition</comm><br>
+						<n>5.</n><t/><t/><comm>// expression3 - loop variable value change rule</comm><br>
+						<n>6.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1>(<k1>int</k1> i = 1; i <= 10; i++)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/>WriteLine(<quot>$&quot;i = {i}&quot;</quot>);<br>
+						<n>4.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div id="csharp5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>while </k1>(condition)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/><comm>// statements;</comm><br>
+						<n>4.</n><t/><t/><comm>// condition variable's value change rule;</comm><br>
+						<n>5.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>int</k1> i = 1;<br>
+						<n>2.</n><t/><k1>while </k1>(i &lt; 11)<br>
+						<n>3.</n><t/>{<br>
+						<n>4.</n><t/><t/>WriteLine(<quot>$&quot;i = {i}&quot;</quot>);<br>
+						<n>5.</n><t/><t/>i++;;<br>
+						<n>6.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton5" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#java5">
+			<u><b>Java Example No. 5</b></u> <img id="javaToggle5" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1>(expression1; expression2; expression3) {<br>
+						<n>2.</n><t/><t/><comm>// expression1 - loop variable initialization</comm><br>
+						<n>3.</n><t/><t/><comm>// expression2 - looping condition</comm><br>
+						<n>4.</n><t/><t/><comm>// expression3 - loop variable value change rule</comm><br>
+						<n>5.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1>(<k1>int</k1> i = 1; i <= 10; i++) {<br>
+						<n>2.</n><t/><t/>println(<quot>&quot;i = %d&quot;</quot>, i);<br>
+						<n>3.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div id="java5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>while </k1>(condition) {<br>
+						<n>2.</n><t/><t/><comm>// statements;</comm><br>
+						<n>3.</n><t/><t/><comm>// condition variable's value change rule;</comm><br>
+						<n>4.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>int</k1> i = 1;<br>
+						<n>2.</n><t/><k1>while </k1>(i &lt; 11) {<br>
+						<n>4.</n><t/><t/>println(<quot>&quot;i = %d&quot;</quot>, i);<br>
+						<n>5.</n><t/><t/>i++;;<br>
+						<n>6.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton5" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#python5">
+			<u><b>Python Example No. 5</b></u> <img id="pythonToggle5" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1> loop_variable <k1>in</k1> expression :<br>
+						<n>2.</n><t/><t/><comm># expression - data array, list</comm><br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1> i <k1>in range</k1>(1, 11) :<br>
+						<n>2.</n><t/><t/><k2>print</k2>(<quot>&quot;i = &quot;</quot>, i)<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div id="python5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>while </k1>condition: {<br>
+						<n>2.</n><t/><t/><comm># statements</comm><br>
+						<n>3.</n><t/><t/><comm># condition variable's value change rule</comm><br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/>i = 1;<br>
+						<n>2.</n><t/><k1>while </k1>i &lt; 11: <br>
+						<n>3.</n><t/><t/><k2>print</k2>(<quot>&quot;i = &quot;</quot>, i)<br>
+						<n>4.</n><t/><t/>i += 1<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<p>
+		In C# language there are also <i>foreach</i> and <i>do-while</i> looping statements. 
+		<i>foreach</i> is convenient to use then you need to iterate through collection of objects. <i>do-while</i> is similar to <i>while</i> 
+		loop, there is one difference, though: in <i>while</i> case, the condition is tested first and then iteration, if condition values is <i>true</i>, 
+		in case of  <i>do</i> loop, iteration goes first, the condition is tested, afterwards.
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton6" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp6">
+			<u><b>C# Example No. 6</b></u> <img id="csharpToggle6" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp6" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>foreach syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>foreach </k1>(DataType variable in collection)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/><comm>// statements;</comm><br>
+						<n>4.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>foreach example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>int[]</k1> masyvas = <k1>new int</k1>[] { 6, 3, 9, -3 };
+						<n>1.</n><t/><k1>foreach </k1>(<k1>int</k1> i <k1>in</k1> masyvas)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/>WriteLine(<quot>$&quot;{i} power of 2 = {i}*{i}&quot;</quot>);<br>
+						<n>4.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div id="csharp6" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>do-while syntax:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>do</k1><br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/><comm>// statements;</comm><br>
+						<n>4.</n><t/><t/><comm>// condition variable's value change rule;</comm><br>
+						<n>5.</n><t/>} <k1>while </k1>(condition);<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>do-while example:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>int</k1> i = 1;<br>
+						<n>2.</n><t/><k1>do</k1><br>
+						<n>3.</n><t/>{<br>
+						<n>4.</n><t/><t/>WriteLine(<quot>$&quot;i = {i}&quot;</quot>);<br>
+						<n>5.</n><t/><t/>i++;;<br>
+						<n>6.</n><t/>} <k1>while </k1>(i &lt; 11);<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>More information about looping statements can be found at:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/iteration-statements" class="list-group-item list-group-item-action"><u><b>C# loops</b> (reference to C# technical documentation)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/while.html" class="list-group-item list-group-item-action"><u><b>Java <i>while, do-while</i></b> (reference to Java technical documentation)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html" class="list-group-item list-group-item-action"><u><b>Java <i>for</i></b> (reference to Java technical documentation)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.python.org/3/tutorial/controlflow.html#for-statements" class="list-group-item list-group-item-action"><u><b>Python <i>for</i></b> (reference to Python technical documentation)</u></a>
+		</div>
+	</div>
+	<hr/>
+</div>

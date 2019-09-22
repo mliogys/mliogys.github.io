@@ -1,0 +1,127 @@
+<div class="container-fluid">
+	<p>
+		Šio skyrelio tikslas supažindinti su objektų gyvavimo ciklu - kaip kinta objekto būsenos nuo pat jo sukūrimo pradžios iki pat sunaikinimo. Paprastai, išskiriamos šios stadijos:
+		<ul class="list-group list-group-flush" style="text-align:left;">
+			<li class="list-group-item" style="background-color: #d9dbf1;">Atminties išskyrimas objekto informacijai saugoti.</li>
+			<li class="list-group-item" style="background-color: #d9dbf1;">Objekto sukūrimas ir inicializavimas.</li>
+			<li class="list-group-item" style="background-color: #d9dbf1;">Objekto naudojimas ir manipuliavimas jo informacija.</li>
+			<li class="list-group-item" style="background-color: #d9dbf1;">Objekto naikinimas.</li>
+		</ul>
+	</p>
+	
+	<p>
+		Prisiminkime kaip yra sukuriamas objektas (1 pav.).
+	</p>
+	
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/13_pvz_1.jpg"><br/>
+		<b>1 pav. Objekto sukūrimas.</b><br/>
+	</p>
+	<p>
+		Kaip matome iš 1 pav., kai kuriame objektą, kairėje lygybės pusėje apibrėžtas objekto pavadinimas (<i>item</i> pavyzdyje) yra adresas steke su nuoroda į heap'e saugomą objekto informaciją, kuri ten įrašoma kai iškviečiamas konstruktorius (dešinė lygybės pusė). Kai objektas tampa nereikalingas, naudota atmintis yra atlaisvinama kitiems objektams saugoti. Už atminties valdymą .NET, JVM, Python aplinkoje atlieka šiukšlių surinkėjas (angl. <i>Garbage Collector</i>). Toliau aptarsime atminties valdymo ypatumus kiekvienoje aplinkoje.
+	</p>
+		
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#csharp1">
+			<b><u>.NET atvejis</u></b> <img id="csharpToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<p>
+				Heap struktūra suskirstyta į tris kategorijas - kartas (angl. <i>generations</i>), valdyti trumpalaikius objektus ir ilgalaikius objektus. Šiukšlių surinkimas, pirmiausiai, atliekamas tarp trumpalaikių objektų ir tik po to tarp ilgalaikių objektų. Heap struktūros kartos:
+				<ul class="list-group list-group-flush" style="text-align:left;">
+					<li class="list-group-item" style="background-color: #d9dbf1;"><b>Karta 0 (angl. <i>Generation 0</i>).</b> Nauji, ką tik sukurti objektai tampa nulinės kartos objektais - trumpalaikiais objektais, kuriuos pirmiausiai bando šiukšlių rinkėjas pašalinti iš atminties. Jei objektas &#132;išgyvena&#148; šiukšlių rinkėjo operacijas, objektas perkeliamas į pirmąją kartą.</li>
+					<li class="list-group-item" style="background-color: #d9dbf1;"><b>Karta 1 (angl. <i>Generation 1</i>).</b> Pirmos kartos objektai rečiau valomi nei nulinės kartos objektai, nes šiai kartai priklauso ilgesnės gyvavimo trukmės objektai. Objektai išgyvenę pirmąją kartą, perkeliami į antrąją kartą.</li>
+					<li class="list-group-item" style="background-color: #d9dbf1;"><b>Karta 2 (angl. <i>Generation 2</i>).</b> Ilgalaikiai objektai, ilgiausiai saugomi atmintyje. Šiukšlių rinkėjas daug rečiau atlieka valymo operacijas tarp šios kartos objektų. 
+					</li>
+				</ul>
+			</p>
+			<p>
+				Objekto gyvavimo trukmę apibrėžia daug faktorių: objekto inicializavimo vieta, ar tai laikinas metodo viduje inicializuotas kintamasis, ar jis perduodamas kitam metodui, ar grąžinamas kitam objektui <i>return</i> operatoriumi ir t.t. 
+			</p>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#java1">
+			<b><u>Java atvejis</u></b> <img id="javaToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<p>
+				Java objektų gyvavimo ciklo būsenos pavaizduotos 2 paveikslėlyje.
+			</p>
+			<p style="text-align:center; padding-right: 20px;">
+				<img class="img-fluid img-thumbnail" src="pics/13_pvz_2.jpg"><br/>
+				<b>2 pav. Java objektų būsenos.</b><br/>
+			</p>
+			<p>
+				<ul class="list-group list-group-flush" style="text-align:left;">
+					<li class="list-group-item" style="background-color: #d9dbf1;"><b>Sukurtas (angl. <i>Created</i>).</b> Objekto, ką tik sukurto, būsena. Ši būsena suteikiama iš karto po <i>new</i> operatoriaus iškvietimo.
+					</li>
+					<li class="list-group-item" style="background-color: #d9dbf1;"><b>Naudojamas (angl. <i>In Use</i>).</b> Objektas turintis bent vieną nuorodą iš steko į save.
+					</li>
+					<li class="list-group-item" style="background-color: #d9dbf1;"><b>Nematomas (angl. <i>Invisible</i>).</b> Objektas neturi ryšių, matomų programai, tačiau galimai turi ryšių su išoriniais resursais. 
+					</li>
+					<li class="list-group-item" style="background-color: #d9dbf1;"><b>Nepasiekiamas (angl. <i>Unreachable</i>).</b> Objektas neturi jokių ryšių su kitais programos, OS ir kitais elementais. Šios būsenos objektai yra perduodami šiukšlių surinkėjui.
+					</li>
+					<li class="list-group-item" style="background-color: #d9dbf1;"><b>Atrinktas (angl. <i>Collected</i>).</b> Atrinkto šalinti objekto būsena.
+					</li>
+					<li class="list-group-item" style="background-color: #d9dbf1;"><b>Užbaigtas (angl. <i>Finallized</i>).</b> Laukiantis pašalinimo iš atminties.
+					</li>
+					<li class="list-group-item" style="background-color: #d9dbf1;"><b>Pašalintas (angl. <i>De-allocated</i>).</b> Pašalintas iš atminties.
+					</li>
+				</ul>
+			</p>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#python1">
+			<b><u>Python pavyzdys Nr. 1</u></b> <img id="pythonToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
+			<p>
+				Python kalboje išskiriamos objekto sukurimo ir sunaikinimo būsenos:
+				<ul class="list-group list-group-flush" style="text-align:left;">
+					<li class="list-group-item" style="background-color: #d9dbf1;">Objekto sukūrimas ir inicializavimas (klasėje apibrėžtu <i>__init__</i> konstruktoriumi).
+					</li>
+					<li class="list-group-item" style="background-color: #d9dbf1;">Objekto naikinimas, remiantis ryšių skaitliuku. Jei skaitliuko reikšmė 0, objektas naikinamas, jei daugiau 0 - objektas paliekamas.
+					</li>
+				</ul>
+			</p>
+		</div>
+	</div>
+	
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie objektų gyvavimo ciklą rasite:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://www.c-sharpcorner.com/UploadFile/b08196/object-lifetime-in-net-framework/" class="list-group-item list-group-item-action"><u><b>.NET objektų gyvavimo ciklas</b> (nuoroda į C# Corner svetainę)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://dzone.com/articles/ocajp-7-object-lifecycle-java" class="list-group-item list-group-item-action"><u><b>Java objektų gyvavimo ciklas</b> (nuoroda į DZone svetainę)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://technobeans.com/2012/01/17/object-lifetime-in-python/" class="list-group-item list-group-item-action"><u><b>Python objektų gyvavimo ciklas</b> (nuoroda į TechnoBeans svetainę)</u></a>
+		</div>
+	</div>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie šiukšlių surinkimą:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/" class="list-group-item list-group-item-action"><u><b>.NET šiukšlių rinkimas</b> (nuoroda į C# techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html" class="list-group-item list-group-item-action"><u><b>Java šiukšlių rinkimas</b> (nuoroda į Oracle svetainę)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.python.org/3/library/gc.html" class="list-group-item list-group-item-action"><u><b>Python šiukšlių rinkimas</b> (nuoroda į Python techninę dokumentaciją)</u></a>
+		</div>
+	</div>
+	<hr/>
+	
+</div>
