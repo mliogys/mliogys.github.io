@@ -1,28 +1,28 @@
 <div class="container-fluid">
 	<p>
-		Išimtinių situacijų valdymas (angl. <i>exception handling</i>) neatsiejama programavimo dalis, skirta valdyti situacijas, kurios nutraukia sėkmingą programos veikimą. Išimtinis atvejis gali kilti dėl daugelio priežasčių: naudotojo įvedami netaisyklingi duomenys, neleistinos aritmetinės operacijos, kreipimasis į neleistiną atminties vietą ir t.t. Jei išimtiniai atvejai yra nevaldomi, programa tiesiog nustoja veikti (&#132;nulūžta&#148;). 
+		Exception handling is part of programming routine, used to control situations that can crash software during its runtime. Exception can appear for many reasons, such as wrong user input, incorrect arithmetic operations (for example, division by zero), accessing protected memory, writing to read-only file and so on. If exceptions are not considered and software end up meeting those, software will stop working and will crash. 
 	</p>
 	<p>
-		Išimtinių situacijų valdymui reikia 4 dalykų:
+		For successful exception handling, these four things are needed to consider and implemented:
 		<ul>
-			<li>Objekto apibrėžiančio išimtinės situacijos detales.</li>
-			<li>Operatoriaus išimtinės situacijos perdavimui išorei.</li>
-			<li>Išimtinės situacijos gaudymo.</li>
-			<li>Išimtinės situacijos perėmimo.</li>
+			<li>Object carrying exception details.</li>
+			<li>Operator throwing exception to caller object.</li>
+			<li>Block for catching exception.</li>
+			<li>Exception overtake.</li>
 		</ul>
 	</p>
 	<p>
-		Pirmi du dalykai yra būtini operacijai sukeliančiai išimtinę situaciją, o paskutiniai du būtini operacijai norinčiai suvaldyti išimtines situacijas. Panagrinėkime pavyzdį, kaip yra sukuriama išimtinė situacija.
+		First two things must be implemented in situations that can create exception, last two things are needed to manage appeared exception. Let's take a look at the example.
 	</p>
 	
 	<div class="container-fluid" style="text-align:left;">
 		<button id="csharpButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#csharp1">
-			<b><u>C# pavyzdys Nr. 1</u></b> <img id="csharpToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+			<b><u>C# Example No. 1</u></b> <img id="csharpToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
 		</button>
 		<div id="csharp1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
-			<b>Klasė <i>Circle</i> be išimtinių situacijų generavimo:</b>
+			<b>Class <i>Circle</i> without exception generation:</b>
 			<div class="code" style="vertical-align:top; text-align: left;">
-				<n>1. </n><t/><comm>// Klasė priimanti bet kokią skaitinę reikšmę</comm><br>
+				<n>1. </n><t/><comm>// Class accepting any double value as radius</comm><br>
 				<n>2. </n><t/><k1>class</k1> <k2>Circle</k2><br>
 				<n>3. </n><t/>{<br>
 				<n>4. </n><t/><t/><k1>public double</k1> radius;<br>
@@ -48,9 +48,9 @@
 				<n>24.</n><t/><t/>}<br>
 				<n>25.</n><t/>}
 			</div>
-			<b>Klasė <i>Circle</i> su išimtinės situacijos generavimu:</b>
+			<b>Class <i>Circle</i> with exception generation:</b>
 			<div class="code" style="vertical-align:top; text-align: left;">
-				<n>1. </n><t/><comm>// Klasė priimanti tik teigiamą skaitinę reikšmę</comm><br>
+				<n>1. </n><t/><comm>// Class accepting only positive double value</comm><br>
 				<n>2. </n><t/><k1>class</k1> <k2>Circle</k2><br>
 				<n>3. </n><t/>{<br>
 				<n>4. </n><t/><t/><k1>public double</k1> radius;<br>
@@ -63,7 +63,7 @@
 				<n>11.</n><t/><t/><k1>public</k1> Circle(<k1>double</k1> r)<br>
 				<n>12.</n><t/><t/>{<br>
 				<n>13.</n><t/><t/><t/><k1>if</k1> (r &lt;= 0.0)<br>
-				<n>14.</n><t/><t/><t/><t/><k1>throw new</k1> <k2>Exception</k2>(<quot>&quot;Apskritimo spindulys turi būti didesnis už 0&quot;</quot>);<br>
+				<n>14.</n><t/><t/><t/><t/><k1>throw new</k1> <k2>Exception</k2>(<quot>&quot;Radius must be of positive value&quot;</quot>);<br>
 				<n>15.</n><t/><t/><t/><k1>else</k1><br>
 				<n>16.</n><t/><t/><t/><t/>radius = r;<br>
 				<n>17.</n><t/><t/>}<br>
@@ -84,12 +84,12 @@
 	
 	<div class="container-fluid" style="text-align:left;">
 		<button id="javaButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#java1">
-			<b><u>Java pavyzdys Nr. 1</u></b> <img id="javaToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+			<b><u>Java Example No. 1</u></b> <img id="javaToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
 		</button>
 		<div id="java1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
-			<b>Klasė <i>Circle</i> be išimtinių situacijų generavimo:</b>
+			<b>Class <i>Circle</i> without exception generation:</b>
 			<div class="code" style="vertical-align:top; text-align: left;">
-				<n>1. </n><t/><comm>// Klasė priimanti bet kokią skaitinę reikšmę</comm><br>
+				<n>1. </n><t/><comm>// Class accepting any double value as radius</comm><br>
 				<n>2. </n><t/><k1>class</k1> <k2>Circle</k2> {<br>
 				<n>3. </n><t/><t/><k1>public double</k1> radius;<br>
 				<n>4. </n><br>
@@ -110,9 +110,9 @@
 				<n>19.</n><t/><t/>}<br>
 				<n>20.</n><t/>}
 			</div>
-			<b>Klasė <i>Circle</i> su išimtinės situacijos generavimu:</b>
+			<b>Class <i>Circle</i> with exception generation:</b>
 			<div class="code" style="vertical-align:top; text-align: left;">
-				<n>1. </n><t/><comm>// Klasė priimanti tik teigiamą skaitinę reikšmę</comm><br>
+				<n>1. </n><t/><comm>// Class accepting only positive double value</comm><br>
 				<n>2. </n><t/><k1>class</k1> <k2>Circle</k2> {<br>
 				<n>3. </n><t/><t/><k1>public double</k1> radius;<br>
 				<n>4. </n><br>
@@ -122,7 +122,7 @@
 				<n>8. </n><br>
 				<n>9. </n><t/><t/><k1>public</k1> Circle(<k1>double</k1> r) <k1>throws</k1> <k2>Exception</k2>{<br>
 				<n>10.</n><t/><t/><t/><k1>if</k1> (r &lt;= 0.0)<br>
-				<n>11.</n><t/><t/><t/><t/><k1>throw new</k1> <k2>Exception</k2>(<quot>&quot;Apskritimo spindulys turi būti didesnis už 0&quot;</quot>);<br>
+				<n>11.</n><t/><t/><t/><t/><k1>throw new</k1> <k2>Exception</k2>(<quot>&quot;Radius must be of positive value&quot;</quot>);<br>
 				<n>12.</n><t/><t/><t/><k1>else</k1><br>
 				<n>13.</n><t/><t/><t/><t/>radius = r;<br>
 				<n>14.</n><t/><t/>}<br>
@@ -141,12 +141,12 @@
 	
 	<div class="container-fluid" style="text-align:left;">
 		<button id="pythonButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#python1">
-			<b><u>Python pavyzdys Nr. 1</u></b> <img id="pythonToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+			<b><u>Python Example No. 1</u></b> <img id="pythonToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
 		</button>
 		<div id="python1" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
-			<b>Klasė <i>Circle</i> be išimtinių situacijų generavimo:</b>
+			<b>Class <i>Circle</i> without exception generation:</b>
 			<div class="code" style="vertical-align:top; text-align: left;">
-				<n>1. </n><t/><comm># Klasė priimanti bet kokią skaitinę reikšmę</comm><br>
+				<n>1. </n><t/><comm># Class accepting any double value as radius</comm><br>
 				<n>2. </n><t/><k1>class</k1> Circle:<br>
 				<n>3. </n><t/><t/>radius = 0.0<br>
 				<n>4. </n><br>
@@ -162,9 +162,9 @@
 				<n>14.</n><t/><t/><k1>def</k1> get_area_size(<k2>self</k2>):<br>
 				<n>15.</n><t/><t/><t/><k1>return</k1> 3.14*<k2>self</k2>.radius*<k2>self</k2>.radius<br>
 			</div>
-			<b>Klasė <i>Circle</i> su išimtinės situacijos generavimu:</b>
+			<b>Class <i>Circle</i> with exception generation:</b>
 			<div class="code" style="vertical-align:top; text-align: left;">
-				<n>1. </n><t/><comm># Klasė priimanti tik teigiamą skaitinę reikšmę</comm><br>
+				<n>1. </n><t/><comm># Class accepting only positive double value</comm><br>
 				<n>2. </n><t/><k1>class</k1> Circle:<br>
 				<n>3. </n><t/><t/>radius = 0.0<br>
 				<n>4. </n><br>
@@ -173,7 +173,7 @@
 				<n>7. </n><br>
 				<n>8. </n><t/><t/><k1>def</k1> __init__(<k2>self</k2>, r):<br>
 				<n>9. </n><t/><t/><t/><k1>if</k1> r &lt;= 0.0:<br>
-				<n>10.</n><t/><t/><t/><t/><k1>raise</k1> Exception(<quot>&quot;Apskritimo spindulys turi būti didesnis už 0&quot;</quot>)<br>
+				<n>10.</n><t/><t/><t/><t/><k1>raise</k1> Exception(<quot>&quot;Radius must be of positive value&quot;</quot>)<br>
 				<n>11.</n><t/><t/><t/><k1>else</k1>:<br>
 				<n>12.</n><t/><t/><t/><t/><k2>self</k2>.radius = r<br>
 				<n>13.</n><br>
@@ -187,25 +187,25 @@
 	</div>
 	
 	<p>
-		Iš pavyzdžių pastebime, jog C#, Java kalbose išimtinės situacijos klasė yra <i>Exception</i>, o operatorius perduodantis išimtinės situacijos objektą į išorę yra <i>throw</i>. Python kalboje taip pat <i>Exception</i> klasė, o operatorius - <i>raise</i>. Išimtinės situacijos naudojimas šiuo atveju leis sukurti tik tokius apskritimo objektus, kurių spindulys didesnis už nulį.
+		As we can see in the examples above, in C# and Java exception obbject is of class <i>Exception</i>, and operator passing exception object to caller is <i>throw</i>. In Python exception object is of class <i>Exception</i>, and operator - <i>raise</i>. Such exception implementation allows to create such objects that has radius value greater than 0.
 	</p>
 	<p>
-		Panagrinėkime pavyzdį, kaip yra valdoma išimtinė situacija.
+		Let's look at another exception handling example.
 	</p>
 	
 	<div class="container-fluid" style="text-align:left;">
 		<button id="csharpButton2" type="button" class="btn btn-link" data-toggle="collapse" data-target="#csharp2">
-			<b><u>C# pavyzdys Nr. 2</u></b> <img id="csharpToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+			<b><u>C# Example No. 2</u></b> <img id="csharpToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
 		</button>
 		<div id="csharp2" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
-			<b>Išimtinių situacijų valdymas:</b>
+			<b>Exception handling:</b>
 			<div class="code" style="vertical-align:top; text-align: left;">
-				<n>1. </n><t/><comm>// Klasės konstruktoriui perduodama neigiama reikšmė.</comm><br>
-				<n>2. </n><t/><comm>// Programa nustos veikti (&#132;nuluš&#148;), nes generuojama ir perduodama išimtinė situacija.</comm><br>
+				<n>1. </n><t/><comm>// Constructor receiving negative value.</comm><br>
+				<n>2. </n><t/><comm>// Program will crash, because of receiving <i>Exception</i> object.</comm><br>
 				<n>3. </n><t/><k2>Circle</k2> circle1 = <k1>new</k1> <k2>Circle</k2>(-5.0);<br>
 				<n>4. </n><t/><br>
-				<n>5. </n><t/><comm>// Klasės konstruktoriui perduodama neigiama reikšmė.</comm><br>
-				<n>6. </n><t/><comm>// Programa &#132;nenuluš&#148;, nes išorinėje klasėje išimtinė situacija yra sugaunama ir perimama.</comm><br>
+				<n>5. </n><t/><comm>// Constructor receiving negative value.</comm><br>
+				<n>6. </n><t/><comm>// Program continue working because exception is handled (caught and taken over).</comm><br>
 				<n>7. </n><t/><k1>try</k1><br>
 				<n>8. </n><t/>{<br>
 				<n>9. </n><t/><t/><k2>Circle</k2> circle2 = <k1>new</k1> Circle(-5.0);<br>
@@ -213,7 +213,7 @@
 				<n>11.</n><t/>}<br>
 				<n>12.</n><t/><k1>catch</k1>(<k2>Exception</k2> exc)<br>
 				<n>13.</n><t/>{<br>
-				<n>14.</n><t/><t/>WriteLine(exc.Message); <comm>// Apskritimo spindulys turi būti didesnis už 0</comm><br>
+				<n>14.</n><t/><t/>WriteLine(exc.Message); <comm>// Radius must be of positive value</comm><br>
 				<n>15.</n><t/>}<br>
 			</div>
 		</div>
@@ -226,17 +226,17 @@
 		<div id="java2" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
 			<b>Išimtinių situacijų valdymas:</b>
 			<div class="code" style="vertical-align:top; text-align: left;">
-				<n>1. </n><t/><comm>// Klasės konstruktoriui perduodama neigiama reikšmė.</comm><br>
-				<n>2. </n><t/><comm>// Programa nustos veikti (&#132;nuluš&#148;), nes generuojama ir perduodama išimtinė situacija.</comm><br>
+				<n>1. </n><t/><comm>// Constructor receiving negative value.</comm><br>
+				<n>2. </n><t/><comm>// Program will crash, because of receiving <i>Exception</i> object.</comm><br>
 				<n>3. </n><t/><k2>Circle</k2> circle1 = <k1>new</k1> <k2>Circle</k2>(-5.0);<br>
 				<n>4. </n><t/><br>
-				<n>5. </n><t/><comm>// Klasės konstruktoriui perduodama neigiama reikšmė.</comm><br>
-				<n>6. </n><t/><comm>// Programa &#132;nenuluš&#148;, nes išorinėje klasėje išimtinė situacija yra sugaunama ir perimama.</comm><br>
+				<n>5. </n><t/><comm>// Constructor receiving negative value.</comm><br>
+				<n>6. </n><t/><comm>// Program continue working because exception is handled (caught and taken over)</comm><br>
 				<n>7. </n><t/><k1>try</k1> {<br>
 				<n>8. </n><t/><t/><k2>Circle</k2> circle2 = <k1>new</k1> Circle(-5.0);<br>
 				<n>9. </n><t/><t/><k1>double</k1> perimeter = circle2.GetPerimeter();<br>
 				<n>10.</n><t/>} <k1>catch</k1>(<k2>Exception</k2> exc) {<br>
-				<n>11.</n><t/><t/>println(exc.getMessage()); <comm>// Apskritimo spindulys turi būti didesnis už 0</comm><br>
+				<n>11.</n><t/><t/>println(exc.getMessage()); <comm>// Radius must be of positive value</comm><br>
 				<n>12.</n><t/>}<br>
 			</div>
 		</div>
@@ -249,23 +249,23 @@
 		<div id="python2" class="collapse border-bottom border-dark" style="padding-bottom: 5px;">		
 			<b>Išimtinių situacijų valdymas:</b>
 			<div class="code" style="vertical-align:top; text-align: left;">
-				<n>1. </n><t/><comm># Klasės konstruktoriui perduodama neigiama reikšmė.</comm><br>
-				<n>2. </n><t/><comm># Programa nustos veikti (&#132;nuluš&#148;), nes generuojama ir perduodama išimtinė situacija.</comm><br>
+				<n>1. </n><t/><comm># Constructor receiving negative value.</comm><br>
+				<n>2. </n><t/><comm># Program will crash, because of receiving <i>Exception</i> object.</comm><br>
 				<n>3. </n><t/>circle1 = <k2>Circle</k2>(-5.0)<br>
 				<n>4. </n><t/><br>
-				<n>5. </n><t/><comm># Klasės konstruktoriui perduodama neigiama reikšmė.</comm><br>
-				<n>6. </n><t/><comm># Programa &#132;nenuluš&#148;, nes išorinėje klasėje išimtinė situacija yra sugaunama ir perimama.</comm><br>
+				<n>5. </n><t/><comm># Constructor receiving negative value.</comm><br>
+				<n>6. </n><t/><comm># Program continue working because exception is handled (caught and taken over).</comm><br>
 				<n>7. </n><t/><k1>try</k1> :<br>
 				<n>8. </n><t/><t/>circle2 = Circle(-5.0)<br>
 				<n>9. </n><t/><t/>perimeter = circle2.get_perimeter()<br>
 				<n>10.</n><t/><k1>except</k1> <k2>Exception</k2> as exc :<br>
-				<n>11.</n><t/><t/>print(str(exc)) <comm># Apskritimo spindulys turi būti didesnis už 0</comm><br>
+				<n>11.</n><t/><t/>print(str(exc)) <comm># Radius must be of positive value</comm><br>
 			</div>
 		</div>
 	</div>
 	
 	<p>
-		Kaip matome pavyzdyje Nr. 2 išimtinių situacijų valdymas išorinėje klasėje vykdomas naudojant <i>try-catch</i> blokus (C#, Java kalbose) arba <i>try-except</i> (Python kalboje). Kodas galintis iššaukti išimtinę situaciją rašomas <i>try</i> bloke, o veiksmai apdoroti išimtinę situaciją <i>catch</i> (<i>except</i>) bloke. <i>try</i> blokas vykdomas kol neįvyksta išimtinis atvejis, tada vykdymas pereina į <i>catch</i> (<i>except</i>) bloką.
+		As we can see in example No. 2 exception handling in caller side is implemented using <i>try-catch</i> block (C# and Java) or <i>try-except</i> (Python). Code part that can end-up in error (exception) must be written in <i>try</i> block, and actions to handle error in <i>catch</i> (<i>except</i>) block. Code in <i>try</i> block is executed while no exception is met, then the execution is passed to <i>catch</i> (<i>except</i>) block.
 	</p>
 	
 	<hr/>
@@ -274,14 +274,14 @@
 			<img class="img-fluid" src="pics/www.png">
 		</div>
 		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
-			<b>Daugiau informacijos apie išimtinių atvejų valdymą rasite:</b>
+			<b>More information about exception handlind:</b>
 		</div>
 	</div>
 	<div style="text-align:left; padding-left: 20px;">		
 		<div class="list-group" style="text-align:left;">
-			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/exceptions/" class="list-group-item list-group-item-action"><u><b>C# išimtinių atvejų valdymas</b> (nuoroda į C# techninę dokumentaciją)</u></a>
-			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/essential/exceptions/" class="list-group-item list-group-item-action"><u><b>Java išimtinių atvejų valdymas</b> (nuoroda į Java techninę dokumentaciją)</u></a>
-			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.python.org/3.7/tutorial/errors.html" class="list-group-item list-group-item-action"><u><b>Python išimtinių atvejų valdymas</b> (nuoroda į Python techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/exceptions/" class="list-group-item list-group-item-action"><u><b>C# exception handling</b> (link to C# technical documentation)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/essential/exceptions/" class="list-group-item list-group-item-action"><u><b>Java exception handling</b> (link to Java technical documentation)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.python.org/3.7/tutorial/errors.html" class="list-group-item list-group-item-action"><u><b>Python exception handling</b> (link to Python technical documentation)</u></a>
 		</div>
 	</div>
 	<hr/>
