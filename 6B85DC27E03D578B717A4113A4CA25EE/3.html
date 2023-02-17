@@ -1,0 +1,721 @@
+<p>
+	<div class="list-group" style="padding-left: 20px; padding-right: 20px;">
+		<a style="padding:10px; background-color: #d9dbf1; color: blue;" href="#dataTypes" class="list-group-item list-group-item-action"><u><b>3.1. Duomenų tipai</b></u></a>
+		<a style="padding:10px; background-color: #d9dbf1; color: blue;" href="#conditionals" class="list-group-item list-group-item-action"><u><b>3.2. Sąlygos operatoriai</b></u></a>
+		<a style="padding:10px; background-color: #d9dbf1; color: blue;" href="#loops" class="list-group-item list-group-item-action"><u><b>3.3. Ciklai</b></u></a>
+	</div>
+</p>
+
+<div id="dataTypes" class="container-fluid" style="text-align:center;">
+	<h4><b>3.1. Duomenų tipai</b></h4>
+	<p>
+		Programos apdorojami duomenys yra saugomi darbinėje atmintyje. Duomenų adresą programos kode simbolizuoja kintamieji. Kiekvienas kintamasis yra tam tikros klasės objektas. Operacijos, galimos atlikti su kintamaisiais, yra apibrėžtos klasėje pagal kurią kintamasis yra sukurtas. Ta pati operacija skirtingiems duomenų tipams gali duoti skirtingą rezultatą. Pavyzdžiui, sudėties operacija, skaičių atveju, grąžiną sumą, o tekstinės informacijos atveju, tekstas apjungiamas.
+	</p>
+	<p>
+		Kiekviena programavimo kalba turi standartinių duomenų tipų rinkinį, kurių pagrindu gali būti konstruojami kiti sudėtiniai duomenų tipai: struktūros arba klasės.
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/csharp_datatypes.png"><br/>
+		<b>1 pav. Standartiniai C# (.NET) duomenų tipai.</b><br/>
+		(Paveikslėlis iš: https://www.c-sharpcorner.com/blogs/data-types-in-csharp1)
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/java_datatypes.png"><br/>
+		<b>2 pav. Standartiniai Java duomenų tipai.</b><br/>
+		(Paveikslėlis iš: https://www.tutorialcup.com/java/data-types.htm)
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/python_datatypes.jpg"><br/>
+		<b>3 pav. Standartiniai Python duomenų tipai.</b><br/>
+		(Paveikslėlis iš: https://www.linkedin.com/pulse/mutable-vs-immutable-objects-python-megha-mohan/)
+	</p>
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie duomenų tipus rasite:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/types-and-variables" class="list-group-item list-group-item-action"><u><b>C# duomenų tipai</b> (nuoroda į C# techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html" class="list-group-item list-group-item-action"><u><b>Java duomenų tipai</b> (nuoroda į Java techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.python.org/3/library/datatypes.html" class="list-group-item list-group-item-action"><u><b>Python duomenų tipai</b> (nuoroda į Python techninę dokumentaciją)</u></a>
+		</div>
+	</div>
+	<hr/>
+</div>	
+
+<div id="conditionals" class="container-fluid" style="text-align:center;">
+	<h4 style="padding-top: 30px;"><b>3.2. Sąlygos operatoriai</b></h4>
+	<p>
+		Programose, skirtose spręsti realius gyvenimiškus uždavinius neišsiverčiama be įvairių sąlygų tikrinimo ir vykdomų operacijų, esant vienai ar kitai situacijai, aprašymo. Sąlygos operatoriai palengvina šią užduotį supaprastindami užduočių valdymą. Populiariausiose programavimo kalbose dažniausiai sutinkami du situacijų valdymo operatoriai: <i>if</i> ir <i>switch</i>.
+	</p>
+	<h5 style="padding-top: 10px;"><b>Operatorius <i>if</i></b></h5>
+	<p>
+		Šio operatoriaus principas yra vienodas visose programavimo kalbose - aprašytai sąlygai yra dvi alternatyvos: <i>tiesa</i> arba <i>netiesa</i>. Jei rezultatas yra <i>tiesa</i>, tuomet vykdomos <i>then</i> šakos operacijos, jei <i>netiesa</i> - <i>else</i> šakos operacijos.
+	</p>
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton1" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp1">
+			<u><b>C# pavyzdys Nr. 1</b></u> <img id="csharpToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp1" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(sąlyga)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/><comm>// sąlygos reikšmė <i>tiesa</i>;</comm><br>
+						<n>4.</n><t/>}<br>
+						<n>5.</n><t/><k1>else</k1><br>
+						<n>6.</n><t/>{<br>
+						<n>7.</n><t/><t/><comm>// sąlygos reikšmė <i>netiesa</i>;</comm><br>
+						<n>8.</n><t/>}
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(x &lt; y)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/>WriteLine(<quot>$&quot;Skaičius {x} yra mažesnis už {y}&quot;</quot>);<br>
+						<n>4.</n><t/>}<br>
+						<n>5.</n><t/><k1>else</k1><br>
+						<n>6.</n><t/>{<br>
+						<n>7.</n><t/><t/>WriteLine(<quot>$&quot;Skaičius {x} yra nemažesnis už {y}&quot;</quot>);<br>
+						<n>8.</n><t/>}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton1" type="button" class="btn btn-link" data-toggle="collapse" data-target="#java1">
+			<u><b>Java pavyzdys Nr. 1</b></u> <img id="javaToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java1" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(sąlyga) {<br>
+						<n>2.</n><t/><t/><comm>// sąlygos reikšmė <i>tiesa</i>;</comm><br>
+						<n>3.</n><t/>} <k1>else</k1> {<br>
+						<n>4.</n><t/><t/><comm>// sąlygos reikšmė <i>netiesa</i>;</comm><br>
+						<n>5.</n><t/>}
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(x &lt; y) {<br>
+						<n>2.</n><t/><t/>format(<quot>&quot;Skaičius %d yra mažesnis už %d&quot;</quot>, x, y);<br>
+						<n>3.</n><t/>} <k1>else</k1> {<br>
+						<n>4.</n><t/><t/>format(<quot>&quot;Skaičius %d yra nemažesnis už %d&quot;</quot>, x, y);<br>
+						<n>5.</n><t/>}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton1" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#python1">
+			<u><b>Python pavyzdys Nr. 1</b></u> <img id="pythonToggle1" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python1" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> sąlyga:<br>
+						<n>2.</n><t/><t/><comm># sąlygos reikšmė <i>tiesa</i></comm><br>
+						<n>3.</n><t/><k1>else</k1>:<br>
+						<n>4.</n><t/><t/><comm># sąlygos reikšmė <i>netiesa</i></comm><br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> x &lt; y:<br>
+						<n>2.</n><t/><t/><k2>print</k2>(<quot>&quot;Skaičius&quot;</quot>,x,<quot>&quot;yra mažesnis už&quot;</quot>,y)<br>
+						<n>3.</n><t/><k1>else</k1>:<br>
+						<n>4.</n><t/><t/><k2>print</k2>(<quot>&quot;Skaičius&quot;</quot>,x,<quot>&quot;yra nemažesnis už&quot;</quot>,y)<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<p style="padding-top: 20px;">
+		Tuo atveju, kai alternatyvų yra daugiau nei dvi, patogiau naudoti <i>if-else-if</i> operatorių.
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton2" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp2">
+			<u><b>C# pavyzdys Nr. 2</b></u> <img id="csharpToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp2" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(sąlyga1)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/><comm>// sąlygos1 reikšmė <i>tiesa</i>;</comm><br>
+						<n>4. </n><t/>}<br>
+						<n>5. </n><t/><k1>else if </k1>(sąlyga2)<br>
+						<n>6. </n><t/>{<br>
+						<n>7. </n><t/><t/><comm>// sąlygos2 reikšmė <i>tiesa</i>;</comm><br>
+						<n>8. </n><t/>}<br>
+						<n>9. </n><t/><k1>else</k1><br>
+						<n>10.</n><t/>{<br>
+						<n>11.</n><t/><t/><comm>// sąlygos2 reikšmė <i>netiesa</i>;</comm><br>
+						<n>12.</n><t/>}
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(x == y)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/>WriteLine(<quot>&quot;Abu skaičiai lygūs&quot;</quot>);<br>
+						<n>4. </n><t/>}<br>
+						<n>5. </n><t/><k1>else if </k1>(x &lt; y)<br>
+						<n>6. </n><t/>{<br>
+						<n>7. </n><t/><t/>WriteLine(<quot>$&quot;Skaičius {x} yra mažesnis už {y}&quot;</quot>);<br>
+						<n>8. </n><t/>}<br>
+						<n>9. </n><t/><k1>else</k1><br>
+						<n>10.</n><t/>{<br>
+						<n>11.</n><t/><t/>WriteLine(<quot>$&quot;Skaičius {x} yra didesnis už {y}&quot;</quot>);<br>
+						<n>12.</n><t/>}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton2" type="button" class="btn btn-link" data-toggle="collapse" data-target="#java2">
+			<u><b>Java pavyzdys Nr. 2</b></u> <img id="javaToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java2" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(sąlyga1) {<br>
+						<n>2.</n><t/><t/><comm>// sąlygos1 reikšmė <i>tiesa</i>;</comm><br>
+						<n>3.</n><t/>} <k1>else if </k1>(sąlyga2) {<br>
+						<n>4.</n><t/><t/><comm>// sąlygos2 reikšmė <i>tiesa</i>;</comm><br>
+						<n>5.</n><t/>} <k1>else</k1> {<br>
+						<n>6.</n><t/><t/><comm>// sąlygos2 reikšmė <i>netiesa</i>;</comm><br>
+						<n>7.</n><t/>}
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if </k1>(x == y) {<br>
+						<n>2.</n><t/><t/>println(<quot>&quot;Abu skaičiai lygūs&quot;</quot>);<br>
+						<n>3.</n><t/>} <k1>else if </k1>(x &lt; y) {<br>
+						<n>4.</n><t/><t/>format(<quot>&quot;Skaičius %d yra mažesnis už %d&quot;</quot>, x, y);<br>
+						<n>5.</n><t/>} <k1>else</k1> {<br>
+						<n>6.</n><t/><t/>format(<quot>&quot;Skaičius %d yra didesnis už %d&quot;</quot>, x, y);<br>
+						<n>7.</n><t/>}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton2" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#python2">
+			<u><b>Python pavyzdys Nr. 2</b></u> <img id="pythonToggle2" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python2" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> sąlyga1:<br>
+						<n>2.</n><t/><t/><comm># sąlygos1 reikšmė <i>tiesa</i></comm><br>
+						<n>3.</n><t/><k1>elif</k1> sąlyga2:<br>
+						<n>4.</n><t/><t/><comm># sąlygos2 reikšmė <i>tiesa</i></comm><br>
+						<n>5.</n><t/><k1>else</k1>:<br>
+						<n>6.</n><t/><t/><comm># sąlygos2 reikšmė <i>netiesa</i></comm><br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> x == y:<br>
+						<n>2.</n><t/><t/><k2>print</k2>(<quot>&quot;Abu skaičiai lygūs&quot;</quot>)<br>
+						<n>3.</n><t/><k1>elif</k1> x &lt; y:<br>
+						<n>4.</n><t/><t/><k2>print</k2>(<quot>&quot;Skaičius&quot;</quot>,x,<quot>&quot;yra mažesnis už&quot;</quot>,y)<br>
+						<n>5.</n><t/><k1>else</k1>:<br>
+						<n>6.</n><t/><t/><k2>print</k2>(<quot>&quot;Skaičius&quot;</quot>,x,<quot>&quot;yra didesnis už&quot;</quot>,y)<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<p style="padding-top: 20px;">
+		Labai dažnai susiduriama su situacija, kai reikia tikrinti ne vieną, o kelias sąlygas iš karto. Tokiu atveju, tikrinamas sąlygas reikia apjungti. Sąlygų jungimo būdai yra šie:
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item" style="background-color: #d9dbf1; text-align: left;"><b>Konjunkcija</b> (loginė sandauga), skaitoma <i>&#132;ir&#148;</i>. Konjunkcijos bendras rezultatas yra <i>tiesa</i>, kai visų sąlygų rezultatas yra <i>tiesa</i>. C#, Java kalbose konjunkcija žymima <i>&amp;&amp;</i> simbolių pora, Python kalboje - raktiniu žodžiu <i>and</i>.</li>
+			<li class="list-group-item" style="background-color: #d9dbf1; text-align: left;"><b>Disjunkcija</b> (loginė suma), skaitoma <i>&#132;arba&#148;</i>. Disjunkcijos bendras rezultatas yra <i>tiesa</i>, kai bent vienos sąlygos rezultatas yra <i>tiesa</i>. C#, Java kalbose disjunkcija žymima <i>||</i> simbolių pora, Python kalboje - raktiniu žodžiu <i>or</i>.</li>
+		</ul>
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton3" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp3">
+			<u><b>C# pavyzdys Nr. 3</b></u> <img id="csharpToggle3" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp3" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Konjunkcijos pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(x &gt; y &amp;&amp; x &gt; z)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/>WriteLine(<quot>$&quot;{x} yra didesnis už {y} ir {z}&quot;</quot>);<br>
+						<n>4. </n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Disjunkcijos pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(x &gt; y || x &gt; z)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/>WriteLine(<quot>$&quot;{x} nėra mažiausias skaičius&quot;</quot>);<br>
+						<n>4. </n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton3" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#java3">
+			<u><b>Java pavyzdys Nr. 3</b></u> <img id="javaToggle3" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java3" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Konjunkcijos pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(x &gt; y &amp;&amp; x &gt; z) {<br>
+						<n>2. </n><t/><t/>println(<quot>&quot;%d yra didesnis už %d ir %d&quot;</quot>, x, y, z);<br>
+						<n>3. </n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Disjunkcijos pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>if </k1>(x &gt; y &amp;&amp; x &gt; z) {<br>
+						<n>2. </n><t/><t/>println(<quot>&quot;%d nėra mažiausias skaičius&quot;</quot>, x);<br>
+						<n>3. </n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton3" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#python3">
+			<u><b>Python pavyzdys Nr. 3</b></u> <img id="pythonToggle3" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python3" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Konjunkcijos pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> x &gt; y <k2>and</k2> x &gt; z:<br>
+						<n>2.</n><t/><t/><k2>print</k2>(<quot>&quot;Skaičius&quot;</quot>,x,<quot>&quot;yra didesnis už&quot;</quot>,y,<quot>&quot;ir&quot;</quot>,z)<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Disjunkcijos pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>if</k1> x &gt; y <k2>or</k2> x &gt; z:<br>
+						<n>2.</n><t/><t/><k2>print</k2>(<quot>&quot;Skaičius&quot;</quot>,x,<quot>&quot;nėra mažiausias skaičius&quot;</quot>)<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<p>
+		Norint patikrinti ar kintamasis yra objektas &#132;saugantis&#148; tam tikrus duomenis, C# ir Java kalbose naudojama sąlyga <i>if (objektas == null)</i>, o Python kalboje - <i>if objektas is None:</i>.
+	</p>
+	<p>
+		Norint patikrinti ar kintamasis yra nuoroda į tam tikros klasės duomenis, C# kalboje naudojama sąlyga <i>if (objektas is Klasė)</i>, Java kalboje naudojama sąlyga <i>if (objektas instanceof Klasė)</i>, o Python kalboje - <i>if objektas is Klasė:</i>.
+	</p>
+	
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie <i>if</i> operatorių rasite:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/if-else" class="list-group-item list-group-item-action"><u><b>C# <i>if</i> operatorius</b> (nuoroda į C# techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/if.html" class="list-group-item list-group-item-action"><u><b>Java <i>if</i> operatorius</b> (nuoroda į Java techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.python.org/3/tutorial/controlflow.html#if-statements" class="list-group-item list-group-item-action"><u><b>Python <i>if</i> operatorius</b> (nuoroda į Python techninę dokumentaciją)</u></a>
+		</div>
+	</div>
+	<hr/>
+	<h5 style="padding-top: 10px;"><b>Operatorius <i>switch</i></b></h5>
+	<p>
+		Operatorių <i>switch</i> patogu naudoti, kai galimų alternatyvų yra baigtinis kiekis. Alternatyva gali būti pasirinkimas meniu sistemose, <i>enum</i> reikšmė ir pan. Operatorius <i>switch</i> yra prieinamas C# ir Java kalbose, o Python kalboje analogiško operatoriaus nėra.
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton4" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp4">
+			<u><b>C# pavyzdys Nr. 4</b></u> <img id="csharpToggle4" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp4" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>switch </k1>(kintamasis)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/><k1>case</k1> reikšmė1:<br>
+						<n>4. </n><t/><t/><t/><comm>// operacijos1;</comm><br>
+						<n>5. </n><t/><t/><t/>break;<br>
+						<n>6. </n><t/><t/><k1>case</k1> reikšmė2:<br>
+						<n>7. </n><t/><t/><t/><comm>// operacijos2;</comm><br>
+						<n>8. </n><t/><t/><t/>break;<br>
+						<n>9. </n><t/><t/><k1>default</k1>:<br>
+						<n>10.</n><t/><t/><t/><comm>// operacijos, esant kitoms reikšmėms;</comm><br>
+						<n>11.</n><t/><t/><t/>break;<br>
+						<n>12.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>switch </k1>(choice)<br>
+						<n>2. </n><t/>{<br>
+						<n>3. </n><t/><t/><k1>case</k1> 1:<br>
+						<n>4. </n><t/><t/><t/>WriteLine(<quot>&quot;Pasirinkote 1-ą operaciją&quot;</quot>);<br>
+						<n>5. </n><t/><t/><t/>break;<br>
+						<n>6. </n><t/><t/><k1>case</k1> 2:<br>
+						<n>7. </n><t/><t/><t/>WriteLine(<quot>&quot;Pasirinkote 2-ą operaciją&quot;</quot>);<br>
+						<n>8. </n><t/><t/><t/>break;<br>
+						<n>9. </n><t/><t/><k1>default</k1>:<br>
+						<n>10.</n><t/><t/><t/>WriteLine(<quot>&quot;Pasirinkote atsijungti iš sistemos.&quot;</quot>);<br>
+						<n>11.</n><t/><t/><t/>WriteLine(<quot>&quot;Geros dienos!&quot;</quot>);<br>
+						<n>12.</n><t/><t/><t/>break;<br>
+						<n>13.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton4" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#java4">
+			<u><b>Java pavyzdys Nr. 4</b></u> <img id="javaToggle4" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java4" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>switch </k1>(kintamasis) {<br>
+						<n>2. </n><t/><t/><k1>case</k1> reikšmė1:<br>
+						<n>3. </n><t/><t/><t/><comm>// operacijos1;</comm><br>
+						<n>4. </n><t/><t/><t/>break;<br>
+						<n>5. </n><t/><t/><k1>case</k1> reikšmė2:<br>
+						<n>6. </n><t/><t/><t/><comm>// operacijos2;</comm><br>
+						<n>7. </n><t/><t/><t/>break;<br>
+						<n>8. </n><t/><t/><k1>default</k1>:<br>
+						<n>9.</n><t/><t/><t/><comm>// operacijos, esant kitoms reikšmėms;</comm><br>
+						<n>10.</n><t/><t/><t/>break;<br>
+						<n>11.</n><t/>}<br>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>Pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1. </n><t/><k1>switch </k1>(choice) {<br>
+						<n>2. </n><t/><t/><k1>case</k1> 1:<br>
+						<n>3. </n><t/><t/><t/>WriteLine(<quot>&quot;Pasirinkote 1-ą operaciją&quot;</quot>);<br>
+						<n>4. </n><t/><t/><t/>break;<br>
+						<n>5. </n><t/><t/><k1>case</k1> 2:<br>
+						<n>6. </n><t/><t/><t/>WriteLine(<quot>&quot;Pasirinkote 2-ą operaciją&quot;</quot>);<br>
+						<n>7. </n><t/><t/><t/>break;<br>
+						<n>8. </n><t/><t/><k1>default</k1>:<br>
+						<n>9.</n><t/><t/><t/>WriteLine(<quot>&quot;Pasirinkote atsijungti iš sistemos.&quot;</quot>);<br>
+						<n>10.</n><t/><t/><t/>WriteLine(<quot>&quot;Geros dienos!&quot;</quot>);<br>
+						<n>11.</n><t/><t/><t/>break;<br>
+						<n>12.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie <i>switch</i> operatorių rasite:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/switch" class="list-group-item list-group-item-action"><u><b>C# <i>switch</i> operatorius</b> (nuoroda į Microsoft techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html" class="list-group-item list-group-item-action"><u><b>Java <i>switch</i> operatorius</b> (nuoroda į Java techninę dokumentaciją)</u></a>
+		</div>
+	</div>
+	<hr/>
+</div>
+
+<div id="loops" class="container-fluid" style="text-align:center;">
+	<h4 style="padding-top: 30px;"><b>3.3. Ciklai</b></h4>
+	<p>
+		Sprendžiant realius uždavinius, dažnai reikia atlikti daug tų pačių operacijų su skirtingais duomenimis. Tam, kad nekartoti daug kartų programos kode tų pačių operacijų naudojami ciklo operatoriai. Ciklo operatorius - operatorius, kartojantis tam tikrą kiekį kartų operacijas, kol tenkinama iš anksto apibrėžta sąlyga. Vienas kartas atliktų ciklo operacijų vadinamas iteracija. Tradiciškai, beveik kiekvienoje programavimo kalboje galime rasti <i>for</i> ir <i>while</i> operatorius. Veikimo principas vienodas visose kalbose, kai kuriais atvejais, skiriasi tik užrašymo sintaksė.
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton5" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp5">
+			<u><b>C# pavyzdys Nr. 5</b></u> <img id="csharpToggle5" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1>(išraiška1; išraiška2; išraiška3)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/><comm>// išraiška1 - ciklo kintamojo inicializavimas</comm><br>
+						<n>4.</n><t/><t/><comm>// išraiška2 - ciklo kartojimo sąlyga</comm><br>
+						<n>5.</n><t/><t/><comm>// išraiška3 - ciklo kintamojo reikšmės kitimo dėsnis</comm><br>
+						<n>6.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1>(<k1>int</k1> i = 1; i <= 10; i++)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/>WriteLine(<quot>$&quot;i = {i}&quot;</quot>);<br>
+						<n>4.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div id="csharp5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>while </k1>(sąlyga)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/><comm>// operacijos;</comm><br>
+						<n>4.</n><t/><t/><comm>// sąlygos kintamojo reikšmės kitimo dėsnis;</comm><br>
+						<n>5.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>int</k1> i = 1;<br>
+						<n>2.</n><t/><k1>while </k1>(i &lt; 11)<br>
+						<n>3.</n><t/>{<br>
+						<n>4.</n><t/><t/>WriteLine(<quot>$&quot;i = {i}&quot;</quot>);<br>
+						<n>5.</n><t/><t/>i++;;<br>
+						<n>6.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="javaButton5" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#java5">
+			<u><b>Java pavyzdys Nr. 5</b></u> <img id="javaToggle5" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="java5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1>(išraiška1; išraiška2; išraiška3) {<br>
+						<n>2.</n><t/><t/><comm>// išraiška1 - ciklo kintamojo inicializavimas</comm><br>
+						<n>3.</n><t/><t/><comm>// išraiška2 - ciklo kartojimo sąlyga</comm><br>
+						<n>4.</n><t/><t/><comm>// išraiška3 - ciklo kintamojo reikšmės kitimo dėsnis</comm><br>
+						<n>5.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1>(<k1>int</k1> i = 1; i <= 10; i++) {<br>
+						<n>2.</n><t/><t/>println(<quot>&quot;i = %d&quot;</quot>, i);<br>
+						<n>3.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div id="java5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>while </k1>(sąlyga) {<br>
+						<n>2.</n><t/><t/><comm>// operacijos;</comm><br>
+						<n>3.</n><t/><t/><comm>// sąlygos kintamojo reikšmės kitimo dėsnis;</comm><br>
+						<n>4.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>int</k1> i = 1;<br>
+						<n>2.</n><t/><k1>while </k1>(i &lt; 11) {<br>
+						<n>4.</n><t/><t/>println(<quot>&quot;i = %d&quot;</quot>, i);<br>
+						<n>5.</n><t/><t/>i++;;<br>
+						<n>6.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="pythonButton5" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#python5">
+			<u><b>Python pavyzdys Nr. 5</b></u> <img id="pythonToggle5" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="python5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1> ciklo_kintamasis <k1>in</k1> išraiška :<br>
+						<n>2.</n><t/><t/><comm># išraiška - duomenų masyvas, sąrašas</comm><br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>for pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>for </k1> i <k1>in range</k1>(1, 11) :<br>
+						<n>2.</n><t/><t/><k2>print</k2>(<quot>&quot;i = &quot;</quot>, i)<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div id="python5" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>while </k1>sąlyga: {<br>
+						<n>2.</n><t/><t/><comm># operacijos</comm><br>
+						<n>3.</n><t/><t/><comm># sąlygos kintamojo reikšmės kitimo dėsnis</comm><br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>while pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/>i = 1;<br>
+						<n>2.</n><t/><k1>while </k1>i &lt; 11: <br>
+						<n>3.</n><t/><t/><k2>print</k2>(<quot>&quot;i = &quot;</quot>, i)<br>
+						<n>4.</n><t/><t/>i += 1<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<p>
+		C# kalboje yra dar ciklas <i>foreach</i> ir <i>do-while</i>. Ciklą <i>foreach</i> patogu naudoti, kai turimas koks nors duomenų rinkinys (masyvas, sąrašas ir pan.) su kurio elementais reikia atlikti tam tikras operacijas. Ciklas <i>do-while</i> labai panašus į ciklą <i>while</i> yra tik vienas esminis skirtumas: ciklo <i>while</i> atveju pirmiau tikrinama sąlyga ir tik tada vykdomos operacijos (jei sąlygos reikšmė tiesa), ciklo <i>do</i> atveju atvirkščiai, pirmiau įvykdomos iteracijos operacijos, o tik po to tikrinama sąlyga.
+	</p>
+	
+	<div class="container-fluid" style="text-align:left;">
+		<button id="csharpButton6" type="button" class="btn btn-link"  data-toggle="collapse" data-target="#csharp6">
+			<u><b>C# pavyzdys Nr. 6</b></u> <img id="csharpToggle6" src="svg/si-glyph-arrow-down.svg" style="width:16px; height:16px;"/>
+		</button>
+		<div id="csharp6" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>foreach sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>foreach </k1>(DuomenųTipas kintamasis in rinkinys)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/><comm>// operacijos;</comm><br>
+						<n>4.</n><t/>}<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>foreach pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>int[]</k1> masyvas = <k1>new int</k1>[] { 6, 3, 9, -3 };
+						<n>1.</n><t/><k1>foreach </k1>(<k1>int</k1> i <k1>in</k1> masyvas)<br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/>WriteLine(<quot>$&quot;{i} kavadratu  = {i}*{i}&quot;</quot>);<br>
+						<n>4.</n><t/>}<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div id="csharp6" class="collapse">		
+			<div class="row border-bottom border-dark" style="padding-bottom: 5px;">
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>do-while sintaksė:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>do</k1><br>
+						<n>2.</n><t/>{<br>
+						<n>3.</n><t/><t/><comm>// operacijos;</comm><br>
+						<n>4.</n><t/><t/><comm>// sąlygos kintamojo reikšmės kitimo dėsnis;</comm><br>
+						<n>5.</n><t/>} <k1>while </k1>(sąlyga);<br>
+					</div>	
+				</div>
+				<div class="col-xs-6 col-sm-6 col-lg-6" style="text-align: left;">
+					<b>do-while pavyzdys:</b>
+					<div class="code" style="vertical-align:top; text-align: left;">
+						<n>1.</n><t/><k1>int</k1> i = 1;<br>
+						<n>2.</n><t/><k1>do</k1><br>
+						<n>3.</n><t/>{<br>
+						<n>4.</n><t/><t/>WriteLine(<quot>$&quot;i = {i}&quot;</quot>);<br>
+						<n>5.</n><t/><t/>i++;;<br>
+						<n>6.</n><t/>} <k1>while </k1>(i &lt; 11);<br>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<hr/>
+	<div class="row" style="display: table;">
+		<div style="vertical-align:top; text-align: right; width:100px;">
+			<img class="img-fluid" src="pics/www.png">
+		</div>
+		<div style="vertical-align:midle; display: table-cell; padding-left: 10px;">
+			<b>Daugiau informacijos apie ciklus rasite:</b>
+		</div>
+	</div>
+	<div style="text-align:left; padding-left: 20px;">		
+		<div class="list-group" style="text-align:left;">
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/iteration-statements" class="list-group-item list-group-item-action"><u><b>C# ciklai</b> (nuoroda į C# techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/while.html" class="list-group-item list-group-item-action"><u><b>Java <i>while, do-while</i></b> (nuoroda į Java techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html" class="list-group-item list-group-item-action"><u><b>Java <i>for</i></b> (nuoroda į Java techninę dokumentaciją)</u></a>
+			<a style="padding:10px; color: blue; background-color: #d9dbf1;" href="https://docs.python.org/3/tutorial/controlflow.html#for-statements" class="list-group-item list-group-item-action"><u><b>Python <i>for</i></b> (nuoroda į Python techninę dokumentaciją)</u></a>
+		</div>
+	</div>
+	<hr/>
+</div>
