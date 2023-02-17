@@ -1,22 +1,29 @@
 <p>
-	Objektinis programavimas - programavimo paradigma grindžiama objektais, kurie savyje, atributų pavidalu, saugo duomenis ir, funkcijų pavidalu, kodą duomenų apdorojimui. Tai yra pagrindinė paradigma, kuria remiantis yra kuriama programinė įranga. Dėl to, jums - siekiantiems tapti programų sistemų kūrimo specialistais yra būtina suprasti objektinio programavimo principus.
-</p>	
-<p>
-	Siekiant pritaikyti objektinio programavimo principus praktikoje, tam reikalingas įrankis - programavimo kalba. Šiuo metu yra šimtai programavimo kalbų ir išsirinkti tinkamą nėra taip jau ir paprasta. Štai keli šaltiniai, pateikiantys programavimo kalbų reitingus ir palengvinantys apsisprendimą dėl programavimo kalbos (-ų) pasirinkimo:
-	<div class="list-group" style="padding-left: 20px; padding-right: 20px;">
-		<a style="padding:10px; background-color: #d9dbf1;" href="https://insights.stackoverflow.com/survey/2018/#most-popular-technologies" class="list-group-item list-group-item-action">Stack Overflow</a>
-		<a style="padding:10px; background-color: #d9dbf1;" href="https://octoverse.github.com/" class="list-group-item list-group-item-action">GitHub</a>
-		<a style="padding:10px; background-color: #d9dbf1;" href="https://www.codingdojo.com/blog/7-most-in-demand-programming-languages-of-2018/" class="list-group-item list-group-item-action">Coding Dojo</a>
-	</div>
-</p>	
-<p>
-	Šiame kurse rasite pateiktus bendrus objektinio programavimo principus bei pavyzdžius, parengtus trimis kalbomis: C#, Java ir Python. Tačiau jūs esate laisvi pasirinkti bet kurią kitą objektinio programavimo kalbą. Rekomenduojamos C#, Java ir Python programavimo aplinkos:
-	<div class="list-group" style="padding-left: 20px; padding-right: 20px;">
-		<a style="padding:10px; background-color: #d9dbf1;" href="https://visualstudio.microsoft.com/vs/community/" class="list-group-item list-group-item-action">Visual Studio Community (C#)</a>
-		<a style="padding:10px; background-color: #d9dbf1;" href="https://www.jetbrains.com/idea/download/#section=windows" class="list-group-item list-group-item-action">IntelliJ IDEA (Java)</a>
-		<a style="padding:10px; background-color: #d9dbf1;" href="https://www.jetbrains.com/pycharm/download/#section=windows" class="list-group-item list-group-item-action">JetBrains PyCharm Community (Python)</a>
-	</div>
+	Šis kursas, skirtas susipažinti su duomenų bazių projektavimo, kūrimo bei valdymo principais. Kurso metu apžvelgsime pagrindines duomenų valdymo komandas ir duomenų projektavimo įrankius. Pradėkime nuo duomenų bazės apibrėžimo.
 </p>
 <p>
-	Sėkmės studijuojant!
+	Duomenų bazė - organizuotas struktūrizuotų duomenų rinkinys, įprastai, saugomas elektroniniame įrenginyje.
+</p>
+<p>
+	Duomenų bazės valdymo sistema - priemonių rinkinys, apimantis duomenų saugojimo, duomenų valdymo, duomenų kontrolės sprendimus. Minėtieji sprendimai apima tai kaip fiziškai duomenys bus saugomi, kaip vėliau jie bus valdomi naudojant specialią kalbą, veiksmus su duomenimis sekimą ir kontrolę, įvairius optimizacijos sprendimus.
+</p>
+<p>
+	Yra daugybė duomenų bazių tipų. Pagrindiniai tipai pagal vidinę duomenų struktūrą, kuriuos mes nagrinėsime yra šie:
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item" style="background-color: #d9dbf1;">reliacinės duomenų bazės;</li>
+		<li class="list-group-item" style="background-color: #d9dbf1;">nereliacinės duomenų bazės (NoSQL).</li>
+	</ul> 
+	Duomenų bazes pagal duomenų bazės paskirtį galima skirstyti į:
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item" style="background-color: #d9dbf1;">transakcines duomenų bazes - nuolatos naudojamas, atnaujinamas;</li>
+		<li class="list-group-item" style="background-color: #d9dbf1;">duomenų saugyklas - naudojamas tik duomenims skaityti, neredaguoti. Tokios duomenų bazės atlieka archyvo paskirtį.</li>
+	</ul> 
+</p>
+<p>
+	Kurso metu, beveik visą dėmesį skirsime reliacinėms duomenų bazėms, nes šio tipo duomenų bazės yra labiausiai paplitę ir yra dominuojančiose pozicijose duomenų bazių rinkoje. Kaip matome žemiau pateiktame paveikslėlyje, net 7 iš 10 populiariausių duomenų bazių sistemų yra reliacinių duomenų bazių valdymo sistemos.
+</p>
+<p style="text-align:center; padding-right: 20px;">
+	<img class="img-fluid img-thumbnail" src="pics/db_ranks.png"><br/>
+	<b>1 pav. Duomenų bazių valdymo sistemų reitingas.</b><br/>
+	(šaltinis: https://db-engines.com/en/ranking)
 </p>
