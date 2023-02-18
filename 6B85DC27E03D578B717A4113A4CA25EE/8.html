@@ -1,3 +1,161 @@
 <p style="margin-top: 10px;">
-	Informacija rengiama.
+	<div id="top" class="list-group" style="padding-left: 20px; padding-right: 20px;">
+		<a style="padding:10px;" href="#database_create" class="list-group-item list-group-item-action">1. Kaip sukurti duomenų bazę MySQL Workbench įrankiu?</a>
+		<a style="padding:10px;" href="#database_drop" class="list-group-item list-group-item-action">2. Kaip ištrinti duomenų bazę MySQL Workbench įrankiu?</a>
+		<a style="padding:10px;" href="#table_create" class="list-group-item list-group-item-action">3. Kaip sukurti duomenų lentelę MySQL Workbench įrankiu?</a>
+		<a style="padding:10px;" href="#field_add" class="list-group-item list-group-item-action">4. Kaip pridėti papildomą laukelį duomenų lentelėje?</a>
+		<a style="padding:10px;" href="#field_remove" class="list-group-item list-group-item-action">5. Kaip pašalinti laukelį iš duomenų lentelės?</a>
+		<a style="padding:10px;" href="#field_change" class="list-group-item list-group-item-action">6. Kaip pakeisti lentelės laukelio duomenų tipą?</a>
+		<a style="padding:10px;" href="#table_drop" class="list-group-item list-group-item-action">7. Kaip pašalinti lentelę?</a>
+		<a style="padding:10px;" href="#record_manage" class="list-group-item list-group-item-action">8. Kaip redaguoti/įterpti/šalinti įrašą?</a>
+	</div>
 </p>
+
+<div class="container-fluid" style="text-align:center;">
+	<h3><b>Atsakymai</b></h3>
+</div>
+
+<div id="database_create" class="container-fluid">
+	<p>
+		<b>1. Kaip sukurti duomenų bazę MySQL Workbench įrankiu?</b>
+	</p>
+	<p>
+		<ol>
+			<li>Spaudžiame schemos (duomenų bazės) kūrimo mygtuką</li>
+			<li>Įvedame schemos (duomenų bazės) pavadinimą. Pavadinime nenaudokite tarpų, jei pavadinimui reikia daugiau nei vieno žodžio, apjunkite juos apatiniu brūkšneliu _ (kaip žemiau pateiktame paveikslėlyje).</li>
+			<li>Spaudžiame mygtuką <i>Apply</i>. Kituose languose taip pat <i>Apply</i> ir <i>Close</i>.</li>
+		</ol>
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/db_create.png"><br/>
+		<b>1 pav. Duomenų bazės kūrimas.</b>
+	</p>
+	<hr />
+</div>
+
+<div id="database_drop" class="container-fluid">
+	<p>
+		<b>2. Kaip ištrinti duomenų bazę MySQL Workbench įrankiu?</b> (<a href="#top">grįžti į viršų</a>)
+	</p>
+	<p>
+		<ol>
+			<li>Spaudžiame dešinį pelės mygtuką ant trinamos schemos (duomenų bazės) pavadinimo ir pasirenkame <i>Drop Schema...</i></li>
+			<li>Spaudžiame mygtuką <i>Drop Now</i>.</li>
+		</ol>
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/db_drop.png"><br/>
+		<b>2 pav. Duomenų bazės šalinimas.</b>
+	</p>
+	<hr />
+</div>
+
+<div id="table_create" class="container-fluid">
+	<p>
+		<b>3. Kaip sukurti duomenų lentelę MySQL Workbench įrankiu?</b> (<a href="#top">grįžti į viršų</a>)
+	</p>
+	<p>
+		<ol>
+			<li>Spaudžiame dešinį pelės mygtuką ant <i>Tables</i> pavadinimo ir pasirenkame <i>Create Table...</i></li>
+			<li>Įvedame lentelės pavadinimą. Pavadinime nenaudokite tarpų, jei pavadinimui reikia daugiau nei vieno žodžio, apjunkite juos apatiniu brūkšneliu.</li>
+			<li>Įvedame laukelių pavadinimus (tarpų taip pat geriau nenaudoti), pasirenkame duomenų tipus bei kitus nustatymus.</li>
+			<li>Spaudžiame mygtuką <i>Apply</i>. Kituose languose taip pat <i>Apply</i> ir <i>Close</i>.</li>
+		</ol>
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/table_create.png"><br/>
+		<b>3 pav. Duomenų lentelės kūrimas.</b>
+	</p>
+	<hr />
+</div>
+
+<div id="field_add" class="container-fluid">
+	<p>
+		<b>4. Kaip pridėti papildomą laukelį duomenų lentelėje?</b> (<a href="#top">grįžti į viršų</a>)
+	</p>
+	<p>
+		<ol>
+			<li>Spaudžiame dešinį pelės mygtuką ant redaguojamos lentelės pavadinimo ir pasirenkame <i>Alter Table...</i></li>
+			<li>Įvedame naujo laukelio pavadinimą, pasirenkame duomenų tipą bei kitus nustatymus.</li>
+			<li>Spaudžiame mygtuką <i>Apply</i>. Kituose languose taip pat <i>Apply</i> ir <i>Close</i>.</li>
+		</ol>
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/field_add.png"><br/>
+		<b>4 pav. Laukelio pridėjimas.</b>
+	</p>
+	<hr />
+</div>
+
+<div id="field_remove" class="container-fluid">
+	<p>
+		<b>5. Kaip pašalinti laukelį iš duomenų lentelės?</b> (<a href="#top">grįžti į viršų</a>)
+	</p>
+	<p>
+		<ol>
+			<li>Spaudžiame dešinį pelės mygtuką ant redaguojamos lentelės pavadinimo ir pasirenkame <i>Alter Table...</i></li>
+			<li>Spaudžiame dešinį pelės mygtuką ant šalinamo laukelio pavadinimo ir pasirenkame <i>Delete Selected</i>.</li>
+			<li>Spaudžiame mygtuką <i>Apply</i>. Kituose languose taip pat <i>Apply</i> ir <i>Close</i>.</li>
+		</ol>
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/field_remove.png"><br/>
+		<b>5 pav. Laukelio šalinimas.</b>
+	</p>
+	<hr />
+</div>
+
+<div id="field_change" class="container-fluid">
+	<p>
+		<b>6. Kaip pakeisti lentelės laukelio duomenų tipą?</b> (<a href="#top">grįžti į viršų</a>)
+	</p>
+	<p>
+		<ol>
+			<li>Spaudžiame dešinį pelės mygtuką ant redaguojamos lentelės pavadinimo ir pasirenkame <i>Alter Table...</i></li>
+			<li>Redaguojamo laukelio tipą pakeičiame į naują. Duomenų tipą leidžiama keisti jei tame laukelyje nėra duomenų arba duomenų tipas yra giminingas ir keičiamas į platesnio diapazono duomenų tipą.</li>
+			<li>Spaudžiame mygtuką <i>Apply</i>. Kituose languose taip pat <i>Apply</i> ir <i>Close</i>.</li>
+		</ol>
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/field_change.png"><br/>
+		<b>6 pav. Laukelio duomenų tipo keitimas.</b>
+	</p>
+	<hr />
+</div>
+
+<div id="table_drop" class="container-fluid">
+	<p>
+		<b>7. Kaip pašalinti lentelę?</b> (<a href="#top">grįžti į viršų</a>)
+	</p>
+	<p>
+		<ol>
+			<li>Spaudžiame dešinį pelės mygtuką ant trinamos lentelės pavadinimo ir pasirenkame <i>Drop Table...</i></li>
+			<li>Spaudžiame mygtuką <i>Drop Now</i>.</li>
+		</ol>
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/table_drop.png"><br/>
+		<b>7 pav. Duomenų lentelės šalinimas.</b>
+	</p>
+	<hr />
+</div>
+
+<div id="record_manage" class="container-fluid">
+	<p>
+		<b>8. Kaip redaguoti/įterpti/šalinti įrašą?</b> (<a href="#top">grįžti į viršų</a>)
+	</p>
+	<p>
+		<ol>
+			<li>Spaudžiame lentelės formos mygtuką prie redaguojamos lentelės pavadinimo</li>
+			<li>Spaudžiame mygtuką, jei norime įvesti naują įrašą.</li>
+			<li>Spaudžiame mygtuką, jei norime redaguoti pasirinktą įrašą.</li>
+			<li>Spaudžiame mygtuką, jei norime šalinti pasirinktą įrašą.</li>
+			<li>Atlikus pakeitimus, spaudžiame mygtuką <i>Apply</i>.</li>
+		</ol>
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/record_manage.png"><br/>
+		<b>8 pav. Įrašo redagavimas/įterpimas/šalinimas.</b>
+	</p>
+	<hr />
+</div>
