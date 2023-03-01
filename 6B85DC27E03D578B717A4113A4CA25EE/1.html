@@ -1,3 +1,136 @@
 <p style="margin-top: 10px;">
-	Informacija rengiama.
+	<div id="top" class="list-group" style="padding-left: 20px; padding-right: 20px;">
+		<a style="padding:10px;" href="#design_intro" class="list-group-item list-group-item-action">Reliacinės duomenų bazės apibrėžimas</a>
+		<a style="padding:10px;" href="#database_intro" class="list-group-item list-group-item-action">Pagrindinės reliacinės duomenų bazės sąvokos</a>
+		<a style="padding:10px;" href="#database_datatypes" class="list-group-item list-group-item-action">Pagrindiniai duomenų tipai</a>
+		<a style="padding:10px;" href="#design_rules" class="list-group-item list-group-item-action">Pagrindinės duomenų bazės projektavimo taisyklės</a>
+	</div>
 </p>
+
+<div id="design_intro" class="container-fluid">
+	<p>
+		<b>Reliacinės duomenų bazės apibrėžimas</b>
+	</p>
+	<p>
+		Reliacinės duomenų bazės pradininku yra mokslininkas <a href="https://www.britannica.com/biography/Edgar-Frank-Codd">dr. Edgar F. Codd</a>, suformulavęs <a href="https://www.javatpoint.com/12-codds-rules">12 teiginių (savybių)</a>, kuriomis turi būti grindžiama reliacinė duomenų bazė ir jos valdymo sistema. Prie šių taisyklių grįšime vėliau.
+	</p>
+	<p>
+		Pagrindinis reliacinės duomenų bazės principas - duomenys yra saugomi sąryšiuose (angl. <i>relations</i>), kurie dažniausiai vadinami lentelėmis.
+	</p>
+	<p>
+		Reliacinė duomenų bazė - sąryšių (lentelių) rinkinys.
+	</p>
+	<p>
+		Reliacinėje duomenų bazėje lentelės tarpusavyje yra susietos ryšiais (angl. <i>relationship</i>).
+	</p>
+</div>
+
+<div id="database_intro" class="container-fluid">
+	<p>
+		<b>Pagrindinės reliacinės duomenų bazės sąvokos</b>
+	</p>
+	<p>
+		Pagrindinis reliacinės duomenų bazės elementas - lentelė, kurioje saugomi duomenys.
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/table.png"><br/>
+		<b>1 pav. Duomenų lentelė.</b>
+	</p>
+	<p>
+		Lentelėje turėtų būti saugomi duomenys tik apie vieną dalyką, objektą. Duomenys tarp atskirų lentelių turi nesidubliuoti. Pavyzdžiui, pirkėjo pristatymo adresas turėtų būti saugomas vienoje lentelėje ir nesikartoti kitoje.
+	</p>
+	<p>
+		Kiekviena lentelė turi apibrėžtą struktūrą - laukus (stulpelius).
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/fields.png"><br/>
+		<b>2 pav. Duomenų lentelės laukai (vertikalios rodyklės).</b>
+	</p>
+	<p>
+		Kiekvienas laukas turi iš anksto apibrėžtą duomenų tipą, pagal kurį duomenų bazių valdymo sistema priskiria duomens valdymo įrankius. Plačiau apie <a href="#database_datatypes">duomenų tipus</a>.
+	</p>
+	<p>
+		Pagrindinės lentelės lauko savybės, ypatybės:
+		<ul>
+			<li>turėtų atspindėti mažiausią duomens fragmentą ir turėti tinkamai parinktą duomenų tipą</li>
+			<li>neturėtų saugoti išskaičiuojamų dalykų</li>
+			<li>gali turėti papildomų nustatymų: būtina/nebūtina reikšmė, unikali reikšmė ir pan.</li>
+		</ul>
+	</p>
+	<p>
+		Lentelėje saugomi duomenys yra vadinami įrašais (angl. <i>records</i>).
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/fields.png"><br/>
+		<b>3 pav. Duomenų lentelės įrašai (horizontalios rodyklės).</b>
+	</p>
+	<p>
+		Pagrindinė įrašui taikoma atisyklė yra ta, kad įrašai turi nesidubliuoti, t.y. nebūti dviejų įrašų, kurių laukų reikšmės yra identiškos.
+	</p>
+</div>
+
+<div id="database_datatypes" class="container-fluid">
+	<p>
+		<b>Pagrindiniai duomenų tipai</b>
+	</p>
+	<p>
+		Apibrėžiant duomenų lentelės struktūrą, reikia identifikuoti lentelės laukelių (stulpelių) paskirtį ir kokio pobūdžio duomenys juose bus saugomi. Lentelėje galima saugoti įvairaus pobūdžio duomenis - nuo žmogui suprantamos (skaičiai, tekstas ir pan.) iki baitų masyvo (failai ir pan.). Kiekvieno tipo duomenims saugoti duomenų bazių valdymo sistema turi dedikuotus atitinkamus standartinius duomenų tipus (žr. 4 pav.). 
+	</p>
+	<p>
+		Duomenų tipai valdymo sistemai padeda nuspręsti koks atminties dydis yra būtinas išskirti duomenims saugoti ir kokias operacijas galima atlikti su duomenimis. Pavyzdžiui, jei duomenų tipas yra <i>int</i> (sveikas skaičius), tai sistema leis atlikti aritmetines operacijas, atlikti palyginimus ir t.t., jei datos tipas (<i>date</i>) - atlikti datų operacijas: palyginti datas, išskirti atskirus datos fragmentus, pridėti/atimti tam tikrą kiekį dienų/mėnesių/metų ir t.t.
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/mysql_data_types.svg"><br/>
+		<b>4 pav. Pagrindiniai MySQL duomenų tipai.</b>
+	</p>
+	<p>
+		Paveikslėlyje pateikti pagrindiniai standartiniai MySQL valdymo sistemos duomenų tipai. Šie duomenų tipai priklauso SQL standartui, dėl to šiuos tipus rasime bet kurioje kitoje reliacinės duomenų bazės valdymo sistemoje.
+	</p>
+</div>
+
+<div id="design_rules" class="container-fluid">
+	<p>
+		<b>Pagrindinės duomenų bazės projektavimo taisyklės</b>
+	</p>
+	<p>
+		Duomenų bazės projektavimas - realaus pasaulio dalies informacijos modelio kūrimas. Projektavimas nėra sudėtingas procesas, užtenka žinoti pagrindines taisykles ir jomis vadovautis. Pradėkime šiomis taisyklėmis:
+		<ul>
+			<li>žinoti projektuojamos sistemos paskirtį - koks galutinis tikslas (rezultatas);</li>
+			<li>nustatyti pagrindines lenteles, kuriose bus saugomi esminiai sistemos duomenys;</li>
+			<li>nustatyti lentelių struktūrą;</li>
+			<li>nustatyti ryšius tarp lentelių.</li>
+		</ul>
+	</p>
+	<p>
+		Kiekvienas parengtas projektas gali turėti daugiau ar mažiau trūkumų, nustatyti projekto kokybę padeda šie klausimai:
+		<ul>
+			<li>Ar dubliuojasi, pasikartoja duomenys lentelėje?</li>
+			<li>Ar dubliuojasi, pasikartoja duomenys tarp lentelių?</li>
+			<li>Ar lentelėje saugomi duomenys apie vieną objektą?</li>
+			<li>Ar praplečiant funkcionalumą reikės daug pakeitimų atlikti?</li>
+		</ul>
+	</p>
+	<p>
+		Jei duomenys toje pačioje lentelėje ar tarp atskirų lentelių nesikartoja ir praplečiant funkcionalumą nereikia redaguoti esamos struktūros, tai tokį projektą galima drąsiai vadinti kokybišku, kitu atveju, mažiau kokybišku. Panagrinėkime pavyzdį (žr. 5 pav.).
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/studiju_programos_design_01.png"><br/>
+		<b>5 pav. Fakultetuose vykdomos studijų programos.</b>
+	</p>
+	<p>
+		Paveikslėlyje pateiktas fakultetuose vykdomų studijų programų projektas. Iš pirmo žvilgsnio gali pasirodyti, kad visai neblogas projektas - įvedama studijų programa, nurodomas studijų lygmuo ir priskiriama fakultetui. Žvelgdami į šį projektą atsakykime į kontrolinius kokybės klausimus, bet prieš tai, užsipildykime šią lentelę duomenimis (žr. 6 pav.), kad būtų lengviau atsakyti į klausimus.
+	</p>
+	<p style="text-align:center; padding-right: 20px;">
+		<img class="img-fluid img-thumbnail" src="pics/studiju_programos_data_01.png"><br/>
+		<b>6 pav. Fakultetuose vykdomų studijų programų duomenys.</b>
+	</p>
+	<p>
+		<i>Ar dubliuojasi, pasikartoja duomenys lentelėje?</i> - Taip, matome, kad pasikartoja studijų lygmens (paveikslėlyje programos_tipas) ir fakultetų pavadinimai.
+		<i>Ar dubliuojasi, pasikartoja duomenys tarp lentelių?</i> - Ne, nes vienintelė lentelė.
+		<i>Ar lentelėje saugomi duomenys apie vieną objektą?</i> - Ne, šioje lentelėje saugomi duomenys apie studijų programą ir fakultetą.
+		<i>Ar praplečiant funkcionalumą reikės daug pakeitimų atlikti?</i> - Taip, pavyzdžiui, jei nuspręstume sistemą praplėsti fakultete dirbančių dėstytojų duomenimis ar studijų programą studijuojančių studentų duomenimis, tai reikėtų nemažai atlikti pakeitimų.
+	</p>
+	<p>
+		Dažniausiai, išsprendus duomenų dubliavimosi, pasikartojimo problemą, išsisprendžia ir funkcionalumo praplėtimo problema. Duomenų dubliavimosi problema išsprendžiama papildomomis lentelėmis. Pavyzdyje matome, kad dažnai pasikartoja <i>programos_tipas</i> reikšmė ir fakulteto duomenys. Perkėlus studijų lymens duomenis ir fakulteto duomenis į atskiras lenteles, perteklinis duomenų dubliavimas panaikinamas. Vėliau belieka šias lenteles susieti tarpusavyje.
+	</p>
+</div>
